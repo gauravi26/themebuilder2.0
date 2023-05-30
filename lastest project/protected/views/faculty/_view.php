@@ -57,34 +57,7 @@ if (isset($data)) {
 </div>
 
 
-<?pho
 
- $courseTypes = array();
-    $models = FacultyCourseType::model()->findAllByAttributes(array('faculty_id' =>$model->id ));
-    foreach ($models as $model) {
-        $courseTypeModel = CourseType::model()->findByPk($model->course_type_id);
-        if ($courseTypeModel !== null) {
-            $courseTypes[] = $courseTypeModel->course_type;
-        }
-    }
-    
-    echo $courseTypes;
-    die();
-?>
-<table>
-  <thead>
-    <tr>
-      <th>Course Types</th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php foreach ($courseType as $type) : ?>
-      <tr>
-        <td><?php echo $type; ?></td>
-      </tr>
-    <?php endforeach; ?>
-  </tbody>
-</table>
 
 
 

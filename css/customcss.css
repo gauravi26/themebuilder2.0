@@ -1,0 +1,145 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 17-May-2023, 3:17:13 pm
+    Author     : hp
+*/
+
+/* Form container */
+div.form {
+  background-color: #333;
+  padding: 20px;
+  border: 1px solid #555;
+  border-radius: 4px;
+}
+
+/* Form input fields */
+div.form input[type="text"],
+div.form input[type="password"],
+div.form input[type="email"],
+div.form input[type="number"],
+div.form input[type="color"],
+div.form textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #777;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px;
+  margin-bottom: 10px;
+  background-color: #222;
+  color: #fff;
+}
+
+/* Form select dropdown */
+div.form select {
+  width: 100%;
+  height: 30px;
+  padding: 8px;
+  border: 1px solid #777;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 12px;
+  margin-bottom: 10px;
+  background-color: #222;
+  color: #fff;
+}
+
+/* Form labels */
+div.form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #fff;
+}
+
+/*Form Button */
+div.form input[type="submit"]{
+
+        border-radius: 10px;
+}
+
+/* Form hint text */
+div.form .hint {
+  color: #ccc;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* Form note text */
+div.form .note {
+  font-style: italic;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #aaa;
+}
+
+/* Form required field indicator */
+div.form span.required {
+  color: #ff0000;
+}
+
+/* Form error styles */
+div.form div.error label:first-child,
+div.form label.error,
+div.form span.error {
+  color: #ff5555;
+}
+
+div.form div.error input,
+div.form div.error textarea,
+div.form div.error select,
+div.form input.error,
+div.form textarea.error,
+div.form select.error {
+  background-color: #440000;
+  border-color: #ff5555;
+}
+
+/* Form error summary */
+div.form .errorSummary {
+  border: 2px solid #ff5555;
+  padding: 7px 7px 12px 7px;
+  margin-bottom: 20px;
+  background-color: #440000;
+  font-size: 16px;
+  color: #ff5555;
+}
+
+div.form .errorMessage {
+  color: #ff5555;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+div.form .errorSummary p {
+  margin: 0;
+  padding: 5px;
+}
+
+div.form .errorSummary ul {
+  margin: 0;
+  padding: 0 0 0 20px;
+}
+
+/* Wide form styles */
+div.wide.form label {
+  float: left;
+  margin-right: 10px;
+  position: relative;
+  text-align: right;
+  width: 100px;
+}
+
+div.wide.form .row {
+  clear: left;
+}
+
+div.wide.form .buttons,
+div.wide.form .hint,
+div.wide.form .errorMessage {
+  clear: left;
+  padding-left: 110px;
+}

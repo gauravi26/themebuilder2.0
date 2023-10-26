@@ -1,0 +1,9 @@
+
+/* 
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHP.php to edit this template
+ */
+.form .row input[type="radio"] {
+  display: inline-block;
+  margin-right: 10px;
+}

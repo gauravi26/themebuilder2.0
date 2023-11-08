@@ -1,5 +1,6 @@
 <?php
 $themeData = [];
+//$scriptData=[];
 class FormThemeController extends Controller
 {
 	/**
@@ -28,7 +29,8 @@ class FormThemeController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view' , 'applyTheme', 'getThemes', 'apply_theme','inspectTheme', 'applyThemeForms','elementCssProperties','applyThemeToForms','textCSSProperties', 'customProperties','applyEffect'),
+				'actions'=>array('index','view' , 'applyTheme', 'getThemes', 'apply_theme','inspectTheme', 'applyThemeForms','elementCssProperties','applyThemeToForms',
+                                    'textCSSProperties', 'customProperties','applyEffect', 'applyScript', 'generateScript'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -313,6 +315,61 @@ public function actionApplyTheme()
 //
 //    
 //}
+//
+// 
+   function saveScriptToRAM($effectkey, $code){
+    global $scriptData;
+    $scriptData[$effectkey] = $code;//Saving Script id 
+    return $code;
+    
+}
+
+function getScriptFromRAM($effectkey)
+{
+    global $scriptData;
+    return isset($scriptData[$effectkey])? $scriptData[$effectkey] : null;//Returning Script 
+    
+}
+
+function actionGenerateScript(){
+    
+  $controllerId = isset($_GET['controller']) ? $_GET['controller'] : null;
+$actionId = isset($_GET['action']) ? $_GET['action'] : null;
+
+// Find the Page Based on Controller Action
+$applicationForm = ApplicationForms::model()->findByAttributes(['controller' => $controllerId, 'action' => $actionId]);
+
+if ($applicationForm) {
+    // Finding Form Based on the combination of Controller and Action
+    $formId = $applicationForm->id;
+
+
+    // Find Effect Key in the 'Effects' table based on form_id
+    $effectKey = Effects::model()->findByAttributes(['form_id' => $formId]);
+     $formID = Effects::model()->findByAttributes(['form_id' => $formId]);
+
+
+    if ($effectKey) {
+        $effects = $effectKey->effects;
+        $formId = $formID->
+//        print_r($effects);
+        // Find the 'ScriptCode' based on 'code' (previously named 'effectkey') from 'Effects' table
+        $effectScript = ScriptCode::model()->findByAttributes(['field_id' => $formId]);
+        $effectScript = ScriptCode::model()->findByAttributes(['effects' => $effects]);
+      
+
+//        echo $effectKey;
+            if ($effectScript) {
+                           $codeData = json_decode($effectScript->code, true);
+                           echo CJSON::encode($codeData);
+                       }
+    }
+}
+
+        
+    
+    
+}
 function saveThemeToRAM($themeId, $themeStyles) {
     global $themeData;
     $themeData[$themeId] = $themeStyles;
@@ -546,7 +603,7 @@ public function actionApplyEffect()
 
     // Find the ApplicationForms model that matches the current controller and action
     $applicationForm = ApplicationForms::model()->findByAttributes(['controller' => $controllerId, 'action' => $actionId]);
-
+    
     if ($applicationForm) {
         // Retrieve the form_id for the matched ApplicationForms model
         $formId = $applicationForm->id;
@@ -556,10 +613,10 @@ public function actionApplyEffect()
 
         if ($effectModel) {
             // Get the selected effect key from the "effects" property
-            $selectedEffectKey = $effectModel->effects;
+            $selectedEffectKey = $effectModel->effects_code_id;
 
             // Read the content of effects.js
-            $effectContent = file_get_contents('AjaxFiles/effects.js');
+            $effectContent = file_get_contents('AjaxFiles/effectScript.json');
 
             // Check if the selected effect key exists in the effectsConfig
             if (strpos($effectContent, "\"$selectedEffectKey\":") !== false) {

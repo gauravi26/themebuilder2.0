@@ -68,6 +68,8 @@
         <script src="<?php echo Yii::app()->baseUrl; ?>/AjaxFiles/customProperties.js"></script>
         <script src="<?php echo Yii::app()->baseUrl; ?>/AjaxFiles/texttypeproperties.js"></script>
         <script src="<?php echo Yii::app()->baseUrl; ?>/AjaxFiles/applytheme.js"></script>
+        <script src="<?php echo Yii::app()->baseUrl; ?>/AjaxFiles/effectScripts.js"></script>
+
 <!--        <script src="<?php echo Yii::app()->baseUrl; ?>/AjaxFiles/setEffects.js"></script>-->
 
 
@@ -117,6 +119,8 @@
             <li><a href="index.php?r=formthememapping/index">Form Theme</a></li>
             <li><a href="index.php?r=FormElementCssPropertiesThemeMapping/getThemeDropBox">Element Properties</a></li>
             <li><a href="index.php?r=currenttheme/update&id=1">Current Theme</a></li>
+             <li><a href="index.php?r=scriptCode/index">Effect Script</a></li>
+            <li><a href="index.php?r=effects/index"> Apply Effect</a></li>
 
         </ul>
     </div>

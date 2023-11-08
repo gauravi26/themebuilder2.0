@@ -4,6 +4,8 @@
     #id {
         color: white;
     }
+    
+    
 </style>
 <?php
 $baseUrl = Yii::app()->baseUrl; 
@@ -56,7 +58,7 @@ $controller = Yii::app()->getController();
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 	<?php echo $form->errorSummary($model); ?>
-          <div class="row">
+          <div class="row" id = "course_type">
     <?php echo $form->labelEx($model, 'course_type'); ?>
     <?php echo $form->textField($model, 'course_type', array('size' => 60, 'maxlength' => 255)); ?>
     <?php echo $form->error($model, 'course_type'); ?>
@@ -64,7 +66,7 @@ $controller = Yii::app()->getController();
 	
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save' ,array('id' => "course_type_btn")); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
@@ -72,6 +74,8 @@ $controller = Yii::app()->getController();
         
 
 ?>
+
+
 
 </div><!-- form -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

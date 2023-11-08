@@ -1,23 +1,23 @@
 <?php
 
 /**
- * This is the model class for table "effects".
+ * This is the model class for table "script_code".
  *
- * The followings are the available columns in table 'effects':
+ * The followings are the available columns in table 'script_code':
  * @property integer $id
- * @property integer $form_id
- * @property integer $trigger_id
- * @property integer $FIELD_ID
- * @property string $effect_code_id
+ * @property string $effects
+ * @property string $css
+ * @property string $code
+ * @property string $Description
  */
-class Effects extends CActiveRecord
+class ScriptCode extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'effects';
+		return 'script_code';
 	}
 
 	/**
@@ -28,12 +28,11 @@ class Effects extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('form_id, trigger_id, FIELD_ID, effect_code_id', 'required'),
-			array('form_id, trigger_id, FIELD_ID', 'numerical', 'integerOnly'=>true),
-			array('effect_code_id', 'length', 'max'=>255),
+			array('effects, css, code, Description', 'required'),
+			array('effects, Description', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, form_id, trigger_id, FIELD_ID, effect_code_id', 'safe', 'on'=>'search'),
+			array('id, effects, css, code, Description', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -55,10 +54,10 @@ class Effects extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'form_id' => 'Form',
-			'trigger_id' => 'Trigger',
-			'FIELD_ID' => 'Field',
-			'effect_code_id' => 'Effect Code',
+			'effects' => 'Effects',
+			'css' => 'Css',
+			'code' => 'Code',
+			'Description' => 'Description',
 		);
 	}
 
@@ -81,10 +80,10 @@ class Effects extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('form_id',$this->form_id);
-		$criteria->compare('trigger_id',$this->trigger_id);
-		$criteria->compare('FIELD_ID',$this->FIELD_ID);
-		$criteria->compare('effect_code_id',$this->effect_code_id,true);
+		$criteria->compare('effects',$this->effects,true);
+		$criteria->compare('css',$this->css,true);
+		$criteria->compare('code',$this->code,true);
+		$criteria->compare('Description',$this->Description,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -95,7 +94,7 @@ class Effects extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Effects the static model class
+	 * @return ScriptCode the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

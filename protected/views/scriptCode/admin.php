@@ -1,15 +1,15 @@
 <?php
-/* @var $this EffectsController */
-/* @var $model Effects */
+/* @var $this ScriptCodeController */
+/* @var $model ScriptCode */
 
 $this->breadcrumbs=array(
-	'Effects'=>array('index'),
+	'Script Codes'=>array('index'),
 	'Manage',
 );
 
 $this->menu=array(
-	array('label'=>'List Effects', 'url'=>array('index')),
-	array('label'=>'Create Effects', 'url'=>array('create')),
+	array('label'=>'List ScriptCode', 'url'=>array('index')),
+	array('label'=>'Create ScriptCode', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -18,7 +18,7 @@ $('.search-button').click(function(){
 	return false;
 });
 $('.search-form form').submit(function(){
-	$('#effects-grid').yiiGridView('update', {
+	$('#script-code-grid').yiiGridView('update', {
 		data: $(this).serialize()
 	});
 	return false;
@@ -26,7 +26,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Effects</h1>
+<h1>Manage Script Codes</h1>
 
 <p>
 You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
@@ -41,15 +41,15 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 </div><!-- search-form -->
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'effects-grid',
+	'id'=>'script-code-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
 		'id',
-		'form_id',
-		'trigger_id',
-		'FIELD_ID',
-		'effect_code_id',
+		'effects',
+		'css',
+		'code',
+		'Description',
 		array(
 			'class'=>'CButtonColumn',
 		),

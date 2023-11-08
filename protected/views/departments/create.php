@@ -13,6 +13,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Create Departments</h1>
+<h1 id="header">Create Departments</h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

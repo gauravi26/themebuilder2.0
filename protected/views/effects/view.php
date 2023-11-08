@@ -23,6 +23,8 @@ $this->menu=array(
 	'attributes'=>array(
 		'id',
 		'form_id',
-		'effects',
+		'trigger_id',
+		'FIELD_ID',
+		'effect_code_id',
 	),
 )); ?>

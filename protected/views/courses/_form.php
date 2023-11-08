@@ -1,7 +1,7 @@
 <style>
   /* Define the CSS styles for the background image */
   .form-with-background {
-    background-image: url('http://localhost/testproject/assets/images/images%20(4).jpeg');
+/*    background-image: url('http://localhost/testproject/assets/images/images%20(4).jpeg');*/
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -71,25 +71,25 @@ $controller = Yii::app()->getController();
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'course_name'); ?>
-		<?php echo $form->textField($model,'course_name',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'course_name'); ?>
-	</div>
+	<div class="row" id="course_name">
+        <?php echo $form->labelEx($model, 'course_name'); ?>
+        <?php echo $form->textField($model, 'course_name', array('size' => 60, 'maxlength' => 255, 'id' => 'course_name')); ?>
+        <?php echo $form->error($model, 'course_name'); ?>
+    </div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'course_link'); ?>
-		<?php echo $form->textField($model,'course_link',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'course_link'); ?>
-	</div>
+    <div class="row" id="course_link">
+        <?php echo $form->labelEx($model, 'course_link'); ?>
+        <?php echo $form->textField($model, 'course_link', array('size' => 60, 'maxlength' => 255, 'id' => 'course_link')); ?>
+        <?php echo $form->error($model, 'course_link'); ?>
+    </div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'department_id'); ?>
-                <?php echo $form->dropDownList($model, 'department_id', $departmentList, array('empty'=>'Select Department')); ?>
-		<?php echo $form->error($model,'department_id'); ?>
-	</div>
+    <div class="row" id="course_page_department_id">
+        <?php echo $form->labelEx($model, 'department_id'); ?>
+        <?php echo $form->dropDownList($model, 'department_id', $departmentList, array('empty' => 'Select Department', 'id' => 'course_page_department_id')); ?>
+        <?php echo $form->error($model, 'department_id'); ?>
+    </div>
 
-<div class="row">
+<div class="row" id="course_page_course_type">
     <?php echo $form->labelEx($model,'course_type_id'); ?>
     <?php
         // get the list of course types
@@ -110,12 +110,38 @@ $controller = Yii::app()->getController();
 
 </div>
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+	<div class="row buttons" >
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save',array('id' => "course_btn")); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
-        
+<script>
+document.getElementById('puff-button').addEventListener('click', applyPuffEffect);
+
+function applyPuffEffect() {
+    var element = document.querySelector('#puff-element');
+
+    // Set the element's opacity to 0
+    element.style.opacity = 0;
+
+    // Gradually reduce the element's size
+    var scale = 1;
+    var interval = setInterval(function () {
+        scale -= 0.1;
+        element.style.transform = `scale(${scale})`;
+
+        // If the scale is small enough, hide the element and stop the animation
+        if (scale <= 0) {
+            element.classList.add('hidden');
+            clearInterval(interval);
+        }
+    }, 50);
+}
+
+</script>
+
+
+
 
 
 </div><!-- form -->

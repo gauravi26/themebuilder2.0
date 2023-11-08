@@ -36,6 +36,14 @@ div.form input[type="checkbox"]{
     color: black;
 }*/
 </style>
+<style>
+  /* Define the CSS class for the animation */
+  .horizTranslate {
+    margin-left: 0; /* Initial margin */
+    transition: margin-left 1s; /* Adjust the duration (1s) as needed */
+  }
+</style>
+
 <!DOCTYPE>
 <div class="form" >
     <?php $form = $this->beginWidget('CActiveForm', array(
@@ -50,25 +58,25 @@ div.form input[type="checkbox"]{
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
+	<div class="row" id="faculty_name">
 		<?php echo $form->labelEx($model,'faculty_name'); ?>
 		<?php echo $form->textField($model,'faculty_name',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'faculty_name'); ?>
 	</div>
 
-	<div class="row">
+	<div class="row"id="faculty_code">
 		<?php echo $form->labelEx($model,'faculty_code'); ?>
 		<?php echo $form->textField($model,'faculty_code',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'faculty_code'); ?>
 	</div>
 
-	<div class="row">
+	<div class="row" id="faculty_department_id">
 		<?php echo $form->labelEx($model,'department_id'); ?>
                 <?php echo $form->dropDownList($model, 'department_id', $departmentList, array('empty'=>'Select Department')); ?>
 		<?php echo $form->error($model,'department_id'); ?>
 	</div>
 
-<div class="row">
+<div class="row" id="faculty_course_type">
     Course Type <br> <?php  //echo CHtml::labelEx('course_type_id'); ?>
 	<?php 
 		// Get the list of course types from the database
@@ -83,25 +91,25 @@ div.form input[type="checkbox"]{
 </div>
 
 
-	<div class="row">
+	<div class="row" id="faculty_course">
 		<?php echo $form->labelEx($model,'course_id'); ?>
                 <?php echo $form->dropDownList($model, 'course_id',$courseList, array('empty'=>'Select Course')); ?>
 		<?php echo $form->error($model,'course_id'); ?>
 	</div>
 
-	<div class="row">
+	<div class="row" id="faculty_email">
 		<?php echo $form->labelEx($model,'email'); ?>
 		<?php echo $form->textField($model,'email',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'email'); ?>
 	</div>
 
-	<div class="row">
+	<div class="row" id="faculty_phone">
 		<?php echo $form->labelEx($model,'phone'); ?>
 		<?php echo $form->textField($model,'phone',array('size'=>20,'maxlength'=>20)); ?>
 		<?php echo $form->error($model,'phone'); ?>
 	</div>
 
-	<div class="row">
+	<div class="row" id="faculty_address">
 		<?php echo $form->labelEx($model,'address'); ?>
 		<?php echo $form->textField($model,'address',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'address'); ?>
@@ -110,7 +118,7 @@ div.form input[type="checkbox"]{
 
 
 	<div class="row buttons" >
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save',array('id' => "faculty_btn")); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
@@ -139,6 +147,39 @@ div.form input[type="checkbox"]{
     
     }?>
 
+   
+        
+      <script>
+            var boxOne = document.getElementsByClassName('faculty_code')[0],
+    $boxTwo = $('.box:eq(1)');
+
+document.getElementsByClassName('faculty_code')[0].onclick = function() {
+  if(this.innerHTML === 'Play') 
+  { 
+    this.innerHTML = 'Pause';
+    boxOne.classList.add('horizTranslate');
+  } else {
+    this.innerHTML = 'Play';
+    var computedStyle = window.getComputedStyle(boxOne),
+        marginLeft = computedStyle.getPropertyValue('margin-left');
+    boxOne.style.marginLeft = marginLeft;
+    boxOne.classList.remove('horizTranslate');    
+  }  
+}
+
+$('.toggleButton:eq(1)').on('click', function() { 
+  if($(this).html() === 'Play') 
+  {
+    $(this).html('Pause');
+    $boxTwo.addClass('horizTranslate');
+  } else {
+    $(this).html('Play');
+    var computedStyle = $boxTwo.css('margin-left');
+    $boxTwo.removeClass('horizTranslate');
+    $boxTwo.css('margin-left', computedStyle);
+  }  
+});
+        </script>    
 </div><!-- form -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
@@ -374,3 +415,4 @@ function applyThemeToForms(mapping) {
 
 
 
+   

@@ -27,8 +27,22 @@ body {
     font-weight: bold;
     border-radius: 5px;
 }*/
-	 
-
+.shake {
+    animation: shake 0.5s;
+  }
+  @keyframes shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-10px); }
+    40% { transform: translateX(10px); }
+    60% { transform: translateX(-10px); }
+    80% { transform: translateX(10px); }
+    100% { transform: translateX(0); }
+  }	 
+/*.blink {
+            border: 3px solid #FBB72D;
+            font-weight: bold;
+            border-radius: 5px;
+        }*/
 </style><?php
 /* @var $this DepartmentsController */
 /* @var $model Departments */
@@ -89,25 +103,25 @@ h1 {
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'department_code'); ?>
-		<?php echo $form->textField($model,'department_code',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'department_code'); ?>
-	</div>
+	<div class="row" id="department_code">
+        <?php echo $form->labelEx($model, 'department_code'); ?>
+        <?php echo $form->textField($model, 'department_code', array('size' => 60, 'maxlength' => 255, 'id' => 'department_code')); ?>
+        <?php echo $form->error($model, 'department_code'); ?>
+    </div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'department_name'); ?>
-		<?php echo $form->textField($model,'department_name',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'department_name'); ?>
-	</div>
+    <div class="row" id="department_name">
+        <?php echo $form->labelEx($model, 'department_name'); ?>
+        <?php echo $form->textField($model, 'department_name', array('size' => 60, 'maxlength' => 255, 'id' => 'department_name')); ?>
+        <?php echo $form->error($model, 'department_name'); ?>
+    </div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'department_desc'); ?>
-		<?php echo $form->textField($model,'department_desc',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'department_desc'); ?>
-        </div>    
-	<div class="row buttons">
-          <?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save', array('id' => 'btn')); ?>
+    <div class="row" id="department_desc">
+        <?php echo $form->labelEx($model, 'department_desc'); ?>
+        <?php echo $form->textField($model, 'department_desc', array('size' => 60, 'maxlength' => 255, 'id' => 'department_desc')); ?>
+        <?php echo $form->error($model, 'department_desc'); ?>
+    </div>
+	<div class="row buttons"  id="button">
+          <?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save', array('id' => 'department_btn')); ?>
 	</div>
 <div>
     <table id="departmentTable">
@@ -120,61 +134,139 @@ h1 {
   <tbody>
   </tbody>
 </table></div>
+        <script>
+//// Get the button by its ID using querySelector
+//const fadeButton = document.querySelector('#department_btn');
+//
+//// Function to toggle the fading effect
+//function toggleFading() {
+//    if (isFaded) {
+//        fadeButton.style.opacity = '1';
+//    } else {
+//        fadeButton.style.opacity = '0.2';
+//    }
+//    isFaded = !isFaded;
+//}
+//
+//// Flag to track the fading state
+//let isFaded = false;
+//
+//// Add a mouseover event listener to the button
+//fadeButton.addEventListener('mouseover', toggleFading);
 
+        
+        
+        </script>
+        
+        
 
                
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery library -->
+<!--<script>
+  // JavaScript function for the shake effect
+  function applyShakeEffect() {
+    var element = document.getElementById('department_btn');
+    if (element) {
+      element.classList.add('shake');
+      setTimeout(function() {
+        element.classList.remove('shake');
+      }, 1000);
+    }
+  }
+
+  // Add the hover event listener to apply the effect
+  document.getElementById('department_btn').addEventListener('mouseenter', applyShakeEffect);
+</script>-->
+
 <script>
-$(document).ready(function() {
-    // Event handler for page load
-    $(window).on('load', function() {
-        var controllerName = $("#controllerId").val();
-        var actionName = $("#actionId").val();
+    
+     // Static JavaScript for the "blink" effect
+//        $(document).ready(function() {
+//            $('#department_btn').hover(
+//                function() {
+//                    var element = $(this);
+//                    element.addClass('blink');
+//                },
+//                function() {
+//                    var element = $(this);
+//                    element.removeClass('blink');
+//                }
+//            );
+//        });
+//$('#department_code').click(function() {
+//  var element = $(this); // Store a reference to the element
+//  element.addClass('shake');
+//  setTimeout(function() {
+//    element.removeClass('shake');
+//  }, 1000);
+//});
 
-        $.ajax({
-            url: 'index.php?r=formtheme/applyEffect&controller=' + controllerName + '&action=' + actionName,
-            method: 'GET',
-            success: function (response) {
-                // Log the response for debugging
-                console.log(response);
 
-                try {
-                    // Extract JSON part by removing leading and trailing characters
-                    var jsonStart = response.indexOf('{');
-                    var jsonEnd = response.lastIndexOf('}');
-                    var trimmedResponse = response.substring(jsonStart, jsonEnd + 1);
-                    var selectedEffectConfig = JSON.parse(trimmedResponse);
-
-                    if (selectedEffectConfig.js && selectedEffectConfig.css) {
-                        // Apply the CSS styles
-                        var styleElement = document.createElement('style');
-                        styleElement.type = 'text/css';
-                        styleElement.appendChild(document.createTextNode(selectedEffectConfig.css));
-                        document.head.appendChild(styleElement);
-
-                        // Dynamically generate the JavaScript code based on the selected effect
-                        var dynamicScript = selectedEffectConfig.js;
-
-                        // Create a new script element
-                        var scriptElement = document.createElement('script');
-                        scriptElement.type = 'text/javascript';
-                        scriptElement.innerHTML = dynamicScript;
-
-                        // Append the script element to the body to execute the JavaScript code
-                        document.body.appendChild(scriptElement);
-                    } else {
-                        console.log('Invalid response format. The response should contain "js" and "css" properties.');
-                    }
-                } catch (error) {
-                    console.log('Error parsing response as JSON:', error);
-                }
-            },
-            error: function (error) {
-                console.log('Error:', error);
-            }
-        });
-    });
-});
+//    function applyShakeEffect(elementId) {
+//  var element = document.getElementById(elementId);
+//  if (element) {
+//    element.classList.add('shake');
+//    setTimeout(function() {
+//      element.classList.remove('shake');
+//    }, 1000); // Adjust the duration as needed
+//  }
+//}
+//applyShakeEffect('department_btn'); // Apply the shake effect to a button
+//applyShakeEffect('department_code');  // Apply the shake effect to a form field
+//applyShakeEffect('department_desc');  // Apply the shake effect to a form field
+//applyShakeEffect('department_code');  // Apply the shake effect to a form field
+//
+//applyShakeEffect('header');  // Apply the shake effect to a title
+//$(document).ready(function() {
+//    // Event handler for page load
+//    $(window).on('load', function() {
+//        var controllerName = $("#controllerId").val();
+//        var actionName = $("#actionId").val();
+//
+//        $.ajax({
+//            url: 'index.php?r=formtheme/applyEffect&controller=' + controllerName + '&action=' + actionName,
+//            method: 'GET',
+//            success: function (response) {
+//                // Log the response for debugging
+//                console.log(response);
+//
+//                try {
+//                    // Extract JSON part by removing leading and trailing characters
+//                    var jsonStart = response.indexOf('{');
+//                    var jsonEnd = response.lastIndexOf('}');
+//                    var trimmedResponse = response.substring(jsonStart, jsonEnd + 1);
+//                    var selectedEffectConfig = JSON.parse(trimmedResponse);
+//
+//                    if (selectedEffectConfig.js && selectedEffectConfig.css) {
+//                        // Apply the CSS styles
+//                        var styleElement = document.createElement('style');
+//                        styleElement.type = 'text/css';
+//                        styleElement.appendChild(document.createTextNode(selectedEffectConfig.css));
+//                        document.head.appendChild(styleElement);
+//
+//                        // Dynamically generate the JavaScript code based on the selected effect
+//                        var dynamicScript = selectedEffectConfig.js;
+//
+//                        // Create a new script element
+//                        var scriptElement = document.createElement('script');
+//                        scriptElement.type = 'text/javascript';
+//                        scriptElement.innerHTML = dynamicScript;
+//
+//                        // Append the script element to the body to execute the JavaScript code
+//                        document.body.appendChild(scriptElement);
+//                    } else {
+//                        console.log('Invalid response format. The response should contain "js" and "css" properties.');
+//                    }
+//                } catch (error) {
+//                    console.log('Error parsing response as JSON:', error);
+//                }
+//            },
+//            error: function (error) {
+//                console.log('Error:', error);
+//            }
+//        });
+//    });
+//});
 </script>
 
 

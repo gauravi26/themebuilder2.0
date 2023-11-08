@@ -22,8 +22,18 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'effects'); ?>
-		<?php echo $form->textField($model,'effects',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->label($model,'trigger_id'); ?>
+		<?php echo $form->textField($model,'trigger_id'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'FIELD_ID'); ?>
+		<?php echo $form->textField($model,'FIELD_ID'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'effect_code_id'); ?>
+		<?php echo $form->textField($model,'effect_code_id',array('size'=>60,'maxlength'=>255)); ?>
 	</div>
 
 	<div class="row buttons">

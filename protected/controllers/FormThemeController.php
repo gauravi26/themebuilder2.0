@@ -30,7 +30,7 @@ class FormThemeController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view' , 'applyTheme', 'getThemes', 'apply_theme','inspectTheme', 'applyThemeForms','elementCssProperties','applyThemeToForms',
-                                    'textCSSProperties', 'customProperties','applyEffect', 'applyScript', 'generateScript'),
+                                    'textCSSProperties', 'customProperties','applyEffect', 'applyScript', 'generateScript', 'reportTheme'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -640,11 +640,72 @@ public function actionApplyEffect()
         echo CJSON::encode(['error' => 'ApplicationForms entry not found']);
     }
 }
+public function actionReportTheme()
+{
+    // Statically set $reportName to "student-container"
+    $reportName = "student-container";
+
+    // Find the report information by attributes
+    $reportInfo = ReportTheme::model()->findByAttributes(array('report_name' => $reportName));
+
+    if ($reportInfo) {
+        $themeId = $reportInfo->theme_ID;
+        $reportColumnName = $reportInfo->report_column;
+
+        // Find the theme by attributes
+        $theme = Themes::model()->findByAttributes(array('ID' => $themeId));
+
+        if ($theme !== null) {
+            $cssStyles = [];
+
+            // Get the column names dynamically
+            $themesColumnName = $theme->getMetaData()->columns;
+
+            // Define an array of column names for special handling
+            $specialHandlingColumns = ['background_image', 'hover'];
+
+         foreach ($themesColumnName as $columnName => $column) {
+    $columnValue = $theme->$columnName;
+
+    // Exclude "ID" and "theme_name" properties
+    if ($columnName !== 'ID' && $columnName !== 'theme_name'&& $columnName !== 'hover' && $columnName !== 'background_image' && !empty($columnValue)  ) {
+        $cssStyle = str_replace('_', '-', $columnName);
+        $cssStyles[] = "$cssStyle: $columnValue";
+    }
+}
 
 
 
 
+            // Construct the CSS selector dynamically
+            $cssSelector = ".$reportName table td:nth-child($reportColumnName)";
 
+            // Check if there are styles for this column
+            if (!empty($cssStyles)) {
+                // Construct the main CSS rule
+                $cssRule = implode(";\n  ", $cssStyles);
+                echo "$cssSelector { \n  $cssRule \n}";
+//print_r($cssSelector);
+//            die();
+                // Check if there is a hover effect specified
+                if (isset($theme->hover) && !empty($theme->hover)) {
+                    // Construct the hover effect dynamically
+                    $hoverCssSelector = "$cssSelector:hover";
+                    echo "\n$hoverCssSelector { \n  " . $theme->hover . " \n}";
+                }
+            } else {
+                // Handle the case where there are no styles for the specified column
+                throw new CHttpException(404, 'No styles found for the specified column');
+            }
+        } else {
+            // Handle the case where the theme is not found
+            throw new CHttpException(404, 'Theme not found');
+        }
+    } else {
+        // Handle the case where the report name is not found
+        throw new CHttpException(404, 'Report not found');
+    }
+}
 
 //public function actionTextCSSProperties()
 //{

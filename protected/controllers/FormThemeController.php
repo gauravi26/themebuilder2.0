@@ -30,7 +30,7 @@ class FormThemeController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view' , 'applyTheme', 'getThemes', 'apply_theme','inspectTheme', 'applyThemeForms','elementCssProperties','applyThemeToForms',
-                                    'textCSSProperties', 'customProperties','applyEffect', 'applyScript', 'generateScript', 'reportTheme'),
+                                    'textCSSProperties', 'customProperties','applyEffect', 'applyScript', 'generateScript', 'reportTheme','applyReportTheme'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -642,17 +642,34 @@ public function actionApplyEffect()
 }
 public function actionReportTheme()
 {
-    // Statically set $reportName to "student-container"
-    $reportName = "student-container";
+    
+//      $controllerId = isset($_GET['controller']) ? $_GET['controller'] : null;
+//    $actionId = isset($_GET['action']) ? $_GET['action'] : null;
+
+
+     $controllerId = "courses";
+    $actionId = "create";
+
+    
+     // Find the ApplicationForms model that matches the current controller and action
+    $applicationForm = ApplicationForms::model()->findByAttributes(['controller' => $controllerId, 'action' => $actionId]);
+    
+    $pageId = $applicationForm->id;
+
 
     // Find the report information by attributes
-    $reportInfo = ReportTheme::model()->findByAttributes(array('report_name' => $reportName));
-
+    $reportInfo = ReportTheme::model()->findByAttributes(array('application_forms_id' => $pageId));
+//    print_r($reportInfo);
+//    die();
     if ($reportInfo) {
+        
         $themeId = $reportInfo->theme_ID;
         $reportColumnName = $reportInfo->report_column;
+        $reportName = $reportInfo->report_name;
+//        print_r($reportName);
+//        die();
 
-        // Find the theme by attributes
+
         $theme = Themes::model()->findByAttributes(array('ID' => $themeId));
 
         if ($theme !== null) {
@@ -674,25 +691,39 @@ public function actionReportTheme()
     }
 }
 
-
-
-
             // Construct the CSS selector dynamically
-            $cssSelector = ".$reportName table td:nth-child($reportColumnName)";
+      $cssSelector = ".{$reportName} table td:nth-child({$reportColumnName})";
 
             // Check if there are styles for this column
             if (!empty($cssStyles)) {
                 // Construct the main CSS rule
-                $cssRule = implode(";\n  ", $cssStyles);
-                echo "$cssSelector { \n  $cssRule \n}";
+                $cssRule = implode($cssStyles);
+//                echo "$cssSelector { \n  $cssRule \n}";
 //print_r($cssSelector);
 //            die();
                 // Check if there is a hover effect specified
+                        $hoverCssSelector = null;
                 if (isset($theme->hover) && !empty($theme->hover)) {
                     // Construct the hover effect dynamically
                     $hoverCssSelector = "$cssSelector:hover";
-                    echo "\n$hoverCssSelector { \n  " . $theme->hover . " \n}";
+                                $hoverCssRule = $theme->hover;
+
                 }
+                 // Store the styles in the array
+        $stylesArray[$cssSelector] = $cssRule;
+        if ($hoverCssSelector !== null) {
+            $stylesArray[$hoverCssSelector] = $hoverCssRule;
+        }
+
+        // Convert the array to JSON format with $formId as the key
+        $jsonStyles = json_encode([$pageId => $stylesArray], JSON_PRETTY_PRINT);
+
+        // Save the JSON to the file
+        $jsonFilePath = 'AjaxFiles/reportTheme.json';
+        file_put_contents($jsonFilePath, $jsonStyles);
+
+        // Output the generated styles (optional)
+        echo $jsonStyles;
             } else {
                 // Handle the case where there are no styles for the specified column
                 throw new CHttpException(404, 'No styles found for the specified column');
@@ -706,6 +737,39 @@ public function actionReportTheme()
         throw new CHttpException(404, 'Report not found');
     }
 }
+
+public function actionApplyReportTheme()
+{
+    $controllerId = "courses";
+    $actionId = "create";
+
+    // Find the ApplicationForms model that matches the current controller and action
+    $applicationForm = ApplicationForms::model()->findByAttributes(['controller' => $controllerId, 'action' => $actionId]);
+
+    $pageId = $applicationForm->id;
+    // print_r($pageId);
+
+    if ($pageId) {
+        // Read the JSON file based on the pageId
+        $jsonFilePath = 'AjaxFiles/reportTheme.json';
+        $jsonContent = file_get_contents($jsonFilePath);
+        
+        // Decode the JSON content
+        $jsonDecoded = json_decode($jsonContent, true);
+
+        // Check if the $pageId exists in the JSON data
+        if (isset($jsonDecoded[$pageId])) {
+            $pageStyles = $jsonDecoded[$pageId];
+            
+            // Use $pageStyles as needed
+            print_r($pageStyles);
+        } else {
+            // Handle the case where $pageId doesn't exist in the JSON data
+            echo "Styles not found for page $pageId";
+        }
+    }
+}
+
 
 //public function actionTextCSSProperties()
 //{

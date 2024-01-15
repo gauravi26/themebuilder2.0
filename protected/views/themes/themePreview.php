@@ -60,6 +60,10 @@
       color: grey;
       height: 530px;
     }
+    
+    h1{
+        text-align: center;
+    }
 /*ul {
     list-style:  inside square;  Set your desired List Style here 
   }
@@ -119,7 +123,7 @@
            
 </div>
         <div id="livePreviewContainer"> <!-- Container for the live preview -->
-          <strong>Text Box</strong> 
+          <strong>Title</strong> 
        <input type="text" name="name"><br>
 <!--      <p>Hello this is sample text to check alignment</p><br>
       <input type="password" name="password"><br>-->
@@ -148,15 +152,15 @@
   </ul>
   
   <!-- Grid -->
-          <strong>Grid</strong> 
+<!--          <strong>Grid</strong> 
   <div class="grid-container">
     <div class="grid-item">Grid Item 1</div>
     <div class="grid-item">Grid Item 2</div>
    
-  </div><br>
+  </div><br>-->
   
   <!-- Tabs -->
-<!--          <strong>Tab </strong> 
+          <strong>Tab </strong> 
    Inside your "themePreview" 
 <div id="tabPreview">
    Tab buttons 
@@ -178,7 +182,7 @@
    Add more tab content sections as needed 
 </div>
 
-  -->
+  
   <!-- Icons -->
         <strong>Icon</strong> 
         

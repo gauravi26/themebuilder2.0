@@ -696,32 +696,61 @@ public function actionReportTheme()
 
             // Check if there are styles for this column
             if (!empty($cssStyles)) {
+              
                 // Construct the main CSS rule
-                $cssRule = implode($cssStyles);
-//                echo "$cssSelector { \n  $cssRule \n}";
-//print_r($cssSelector);
-//            die();
-                // Check if there is a hover effect specified
-                        $hoverCssSelector = null;
-                if (isset($theme->hover) && !empty($theme->hover)) {
-                    // Construct the hover effect dynamically
-                    $hoverCssSelector = "$cssSelector:hover";
-                                $hoverCssRule = $theme->hover;
+                $cssRule = implode(';', $cssStyles) . ';';
+// Construct the hover effect dynamically
+$hoverCssSelector = "$cssSelector:hover";
+$hoverCssRule = null;
 
-                }
-                 // Store the styles in the array
-        $stylesArray[$cssSelector] = $cssRule;
-        if ($hoverCssSelector !== null) {
-            $stylesArray[$hoverCssSelector] = $hoverCssRule;
-        }
+// Check if there is a hover effect specified
+if (isset($theme->hover) && !empty($theme->hover)) {
+    // Check if $theme->hover is an array
+    if (is_array($theme->hover)) {
+        // Construct the hover effect dynamically
+        $hoverCssRule = implode(';', $theme->hover) . ';';
+    } else {
+        // If $theme->hover is not an array, use it as is
+        $hoverCssRule = $theme->hover;
+    }
+}
+
+// Store the styles in the array
+$stylesArray[$cssSelector] = $cssRule;
+
+if ($hoverCssSelector !== null) {
+    $stylesArray[$hoverCssSelector] = $hoverCssRule;
+}
 
         // Convert the array to JSON format with $formId as the key
         $jsonStyles = json_encode([$pageId => $stylesArray], JSON_PRETTY_PRINT);
 
         // Save the JSON to the file
         $jsonFilePath = 'AjaxFiles/reportTheme.json';
-        file_put_contents($jsonFilePath, $jsonStyles);
+          
+       // Read existing JSON from the file
+$existingJson = file_get_contents($jsonFilePath);
 
+// Decode existing JSON into an associative array
+$existingData = json_decode($existingJson, true);
+
+// Check if the $pageId already exists in the array
+if (isset($existingData[$pageId])) {
+    // Append the new data to the existing array for the same $pageId
+    $existingData[$pageId][] = $stylesArray;
+} else {
+    // Create a new entry for the $pageId with an array containing the new data
+    $existingData[$pageId] = [$stylesArray];
+}
+
+// Convert the updated array to JSON format
+$jsonStyles = json_encode($existingData, JSON_PRETTY_PRINT);
+
+// Save the updated JSON to the file
+file_put_contents($jsonFilePath, $jsonStyles);
+
+// Output the generated styles (optional)
+echo $jsonStyles;
         // Output the generated styles (optional)
         echo $jsonStyles;
             } else {

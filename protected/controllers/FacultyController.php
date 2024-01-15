@@ -32,7 +32,7 @@ class FacultyController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','delete', 'getFacultyDetails', 'fetchFaculty', 'getCourseTypes', 'getFacultyDetailsDynamically', 'getFacultyDetailsColumnDynamically', 'fectchFacultyDetailsColumn'),
+				'actions'=>array('create','update','delete', 'getFacultyDetails', 'fetchFaculty', 'getCourseTypes', 'getFacultyDetailsDynamically', 'getFacultyDetailsColumnDynamically', 'fectchFacultyDetailsColumn','testReport'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -486,6 +486,10 @@ $selectedCourseTypes = isset($_POST['course_type_id']) ? $_POST['course_type_id'
     } else {
         echo "Theme not found!";
     }
+}
+public function actiontestReport(){
+    
+    $this->render("testreport");
 }
 
 }

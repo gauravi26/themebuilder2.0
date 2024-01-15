@@ -255,6 +255,7 @@ textarea {
   <button class="tablinks" onclick="openCss(event, 'Icon')">Icon</button>
 -->  <button class="tablinks" onclick="openCss(event, 'List')">List</button>
   <button class="tablinks" onclick="openCss(event, 'Tab')">Tab</button>
+  <button class="tablinks" onclick="openCss(event, 'Icon')">Icon</button>
 
 
 
@@ -275,33 +276,22 @@ textarea {
         <div id = "BoxModel" class="tabcontent"><br>
                 <label><strong>Box Model:</strong></label>
                 <label class="label-bold"> Theme Name :</label>
-                <input type="text" name="theme_name" id="theme_name" ><br>
-                <label>Height:</label>
-                <input type="text" name="height" class="reverse-arrows"> px<br> 
-                <label>Width:</label>
-                <input type="text" name="width"> px<br> 
-               <label>Margin:</label>
-    <input type="text" id="marginInput" name="margin"> px
+                <input type="text" name="theme_name" id="theme_name" value="<?php echo CHtml::encode($theme->theme_name); ?>"><br>
+               <label>Height:</label>
+    <input type="text" name="height" value="<?php echo CHtml::encode($theme->height); ?>"> px<br> 
+    <label>Width:</label>
+    <input type="text" name="width" value="<?php echo CHtml::encode($theme->width); ?>"> px<br> 
+   <label>Margin:</label>
+    <input type="text" id="marginInput" name="margin" value="<?php echo CHtml::encode($theme->margin); ?>"> px
 
     <label>Padding:</label>
-    <input type="text" id="paddingInput" name="padding"> px
+    <input type="text" id="paddingInput" name="padding" value="<?php echo CHtml::encode($theme->padding); ?>"> px
 
     <label>Slider:</label>
-    <input type="range" id="slider" min="0" max="100" step="1" oninput="updateInputValues()">
+    <input type="range" id="slider" min="0" max="100" step="1" oninput="updateInputValues()" >
 
-<!--                <input type="text" name="margin_right" placeholder="Right"> px
-                <input type="text" name="margin_bottom" placeholder="Bottom"> px 
-                <input type="text" name="margin_left" placeholder="Left" > px<br> -->
-             
-<!--                <input type="text" name="padding_right" placeholder="Right"> px
-                <input type="text" name="padding_bottom" placeholder="Bottom"> px
-                <input type="text" name="padding_left" placeholder="Left"> px<br> -->
-<!--                <label>Height:</label>
-                <input type="text" name="height"> px<br> 
-                <label>Width:</label>
-                <input type="text" name="width"> px<br> -->
                 <label>Display Property</label>
-                <select name="display_property" class="custom-select">
+                <select name="display_property" class="custom-select" value="<?php echo CHtml::encode($theme->display); ?>">
                     <option selected disabled>Select</option>
                     <option value="block">Block</option>
                     <option value="inline">Inline</option>
@@ -314,10 +304,11 @@ textarea {
                     <option value="none">None</option>
                 </select><br>
 
-                                <label>Clear:</label>
-                                <input type="text" name="clear"> px<br> 
-                               <label>Position Property</label>
-                <select name="position" class="custom-select">
+               <label>Clear:</label>
+               <input type="text" name="clear" value="<?php echo CHtml::encode($theme->clear); ?>" > px<br> 
+               
+               <label>Position Property</label>
+                <select name="position" class="custom-select" value="<?php echo CHtml::encode($theme->position); ?>">
                     <option selected disabled>Select</option>
                     <option value="static">Static</option>
                     <option value="relative">Relative</option>
@@ -326,23 +317,24 @@ textarea {
                     <option value="sticky">Sticky</option>
                 </select><br>
 
-<!--                <label>Resize:</label>
-                <input type="text" name="resize"> px<br> -->
+
                 <label>Box Sizing:</label>
-                <select name="box_sizing" class="custom-select">
+                <select name="box_sizing" class="custom-select" value="<?php echo CHtml::encode($theme->box_sizing); ?>">
                     <option selected disabled>Select</option>
                     <option value="content-box">Content Box</option>
                     <option value="border-box">Border Box</option>
                 </select><br>
             </div>
+            
+            
                 <!-- Text -->
-                 <?php
-$this->beginWidget('CActiveForm', array(
-    'id' => 'textForm',
-    'enableAjaxValidation' => false,
-    // other form options
-));
-?>
+ <?php
+    $this->beginWidget('CActiveForm', array(
+        'id' => 'textForm',
+        'enableAjaxValidation' => false,
+        // other form options
+    ));
+  ?>
                <div id="Text" class="tabcontent"><br>
         <label><strong>Text:</strong></label><br>
    <div class="nested-tab">
@@ -359,7 +351,7 @@ $this->beginWidget('CActiveForm', array(
          <label>Text Color :</label>
         <p><input type="color" name="h1_color" data-text-type="h1"><br>
                   <label>Font Size :</label>
-                <input type="text" id="h1_font_size" name="h1_font_size" data-text-type="h1"> px<br> 
+                <input type="text" id="h1_font_size" name="h1_font_size" data-text-type="h1" > px<br> 
                <input type="range" id="fontSizeSlider" >
 
 <!--                <input type="number" id="fontSizeInput" name="font_size" min="1" max="100" value="16">px<br>
@@ -722,13 +714,27 @@ $this->beginWidget('CActiveForm', array(
             
                         <label><strong>Background :</strong></label><br>                        
                 <label>Background Color:</label>
-                <input type="color" name="background_color" value="#FFFFFF"><br>
-                 <label for="background_image">Background Image:</label>
+<input type="color" name="background_color" value="<?php echo empty($theme->background_color) ? '#FFFFFF' : CHtml::encode($theme->background_color); ?>"><br>
+ <label for="background_image">Background Image:</label>
 <input type="file" name="file" id="background_image"><br/>
 Enter image name:<input type="text" name="filename"><br/>
+
+<!-- Additional text box with the same ID as the file input -->
+<select name="background_image_dropdown" id="background_image_dropdown">
+    <?php
+    $imageFolderPath = 'images/';
+    $savedImages = scandir($imageFolderPath);
+    $savedImages = array_diff($savedImages, array('.', '..'));
+
+    foreach ($savedImages as $savedImage) {
+        $imageName = htmlspecialchars(urldecode($savedImage));
+        echo "<option value=\"$imageName\">$imageName</option>";
+    }
+    ?>
+</select><br/>
                     <label>Repeat:</label>
                     
-                    <select name="background_repeat" class="custom-select" id="background_repeat">>
+                    <select name="background_repeat" class="custom-select" id="background_repeat" value="<?php echo CHtml::encode($theme->background_repeat); ?>">>
                       <option selected >Select</option>
                       <option value="repeat">Repeat</option>
                       <option value="repeat-x">Repeat Horizontally</option>
@@ -736,7 +742,7 @@ Enter image name:<input type="text" name="filename"><br/>
                       <option value="no-repeat">No Repeat</option>
                     </select><br>
                     <label>Position:</label>
-                    <select name="background_position" id="background_position">
+                    <select name="background_position" id="background_position" value="<?php echo CHtml::encode($theme->background_position); ?>">
                       <option value="center center">Center</option>
                             <option value="left top">Left Top</option>
                             <option value="right top">Right Top</option>
@@ -774,18 +780,18 @@ Enter image name:<input type="text" name="filename"><br/>
                     </select><br>  -->
                      </div>
                   <div id ="Border" class="tabcontent"><br>
-                      <label>Border-Style:</label><br>
-                            <select name ="border_style" class="custom-select"><br>
-                                 <option selected >Select</option>
-                                <option value ="hidden">Hidden</option>
-                                <option value ="dotted">Dotted</option>
-                                <option value ="dashed">Dashed</option>
-                                <option value ="solid">Solid</option>
-                                <option value ="double">Double</option>
-                                <option value ="groove">Groove</option>
-                                <option value ="ridge">Ridge</option>
+                     <label>Border-Style:</label><br>
+<?php
+$borderStyles = ['hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge'];
 
-                            </select><br>  
+echo CHtml::dropDownList(
+    'border_style',
+    $theme->border_style,
+    array_combine($borderStyles, $borderStyles),
+    array('class' => 'custom-select', 'prompt' => 'Select')
+);
+?>
+<br>
             
 <!--                         <label><strong>Border:</strong></label><br>
                         <label>Border:</label><br>-->
@@ -804,11 +810,11 @@ Enter image name:<input type="text" name="filename"><br/>
                         </select>
                          <br>
                             <label>Border Width:</label><br>
-                            <input type="text" name="border_width"> px<br>
+                            <input type="text" name="border_width" value="<?php echo CHtml::encode($theme->border_width); ?>"> px<br>
                             <label>Border Radius:</label><br>
-                            <input type="text" name="border_radius"> px<br>
+                            <input type="text" name="border_radius" value="<?php echo CHtml::encode($theme->border_radius); ?>"> px<br>
                             <label>Border color:</label><br>
-                            <input type="color" name="border_color"> px<br>
+                            <input type="color" name="border_color"value="<?php echo CHtml::encode($theme->border_color); ?>"> px<br>
                                           
                       </div><br>
                       
@@ -881,11 +887,25 @@ Enter image name:<input type="text" name="filename"><br/>
             <label>Hover Link Color:</label>
             <input type="color" name="hover"><br>
         </div><br>
-          <div id ="Icon" class="tabcontent"><br>
-            
-                        <label><strong>Icon:</strong></label><br>
-            <label>Icon Color:</label>
-            <input type="color" name="icon_color"><br>
+          <div id ="Icon" class="tabcontent"><br>      
+           <label><strong>Icon:</strong></label>
+           <label for="icon">icon</label>
+<input type="file" name="iconfile" id="icon"><br/>
+Enter icon name:<input type="text" name="iconfilename"><br/>
+
+<!-- Additional text box with the same ID as the file input -->
+<select name="icon_dropdown" id="icon_dropdown">
+    <?php
+    $iconFolderPath = 'icon/';
+    $savedIcons = scandir($iconFolderPath);
+    $savedIcons = array_diff($savedIcons, array('.', '..'));
+
+    foreach ($savedIcons as $savedIcon) {
+        $iconName = htmlspecialchars(urldecode($savedIcon));
+        echo "<option value=\"$iconName\">$iconName</option>";
+    }
+    ?>
+</select><br/>
             <label>Icon Size:</label>
             <input type="text" name="icon_size"> px<br>
            
@@ -1101,15 +1121,15 @@ Enter image name:<input type="text" name="filename"><br/>
 </div>
 <script>
         // Function to update the input field values when the slider is changed
-        function updateInputValues() {
-            const slider = document.getElementById('slider');
-            const marginInput = document.getElementById('marginInput');
-            const paddingInput = document.getElementById('paddingInput');
-
-            // Update margin and padding input values
-            marginInput.value = slider.value;
-            paddingInput.value = slider.value;
-        }
+//        function updateInputValues() {
+//            const slider = document.getElementById('slider');
+//            const marginInput = document.getElementById('marginInput');
+//            const paddingInput = document.getElementById('paddingInput');
+//
+//            // Update margin and padding input values
+//            marginInput.value = slider.value;
+//            paddingInput.value = slider.value;
+//        }
     </script>
 <!--<script>
 const fontSizeInput = document.getElementById("fontSizeInput");

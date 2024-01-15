@@ -130,12 +130,15 @@
 
 <?php 
 $themeId = is_array($elementModels) ? $elementModels[0]->theme_ID : $elementModels->theme_ID; 
-
-// var_dump($themeId);
+$themeName = Themes::model()->findByPK($themeId,'ID','theme_name');
+$themeModel = Themes::model()->findByPK($themeId,'ID','theme_name');
+$themeName = $themeModel !== null ? $themeModel->theme_name : 'N/A';
+// var_dump($themeName);
 // die();
 $formElementCssPropertiesId = range(1, 160);
 
 ?>
+    <p>Selected Theme Name: <?php echo $themeName; ?></p>
 
 
 <h1>Change/Update Element's CSS Property Value</h1>

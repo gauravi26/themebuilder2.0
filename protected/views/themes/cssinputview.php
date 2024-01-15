@@ -51,7 +51,8 @@ if(session_status() == PHP_SESSION_NONE) {
   <button class="tablinks" onclick="openCss(event, 'Grid')">Grid</button>-->
 <!--  <button class="tablinks" onclick="openCss(event, 'Icon')">Icon</button>-->
     <button class="tablinks" onclick="openCss(event, 'Tab')">Tab</button>
-    
+        <button class="tablinks" onclick="openCss(event, 'Icon')">Icon</button>
+
     
 
 </div>
@@ -425,8 +426,8 @@ if(session_status() == PHP_SESSION_NONE) {
  <div id="Icon" class="tabcontent">
     <table>
       <tr>
-    <td>Icon Color:</td>
-    <td><?php echo $theme->icon_color; ?></td>
+    <td>Icon </td>
+    <td><?php echo $theme->icon; ?></td>
   </tr>
   <tr>
     <td>Icon Size </td>

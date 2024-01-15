@@ -6,7 +6,7 @@ $(document).ready(function() {
             console.log('Theme applied successfully.'); // Optional: Display a success message in the console
             
             // Apply the CSS styles to the .form element
-            $('.form').css(response);
+            $('.body').css(response);
             
             // Additional code for handling the theme response, if needed
         },

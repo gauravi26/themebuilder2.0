@@ -28,7 +28,7 @@ class ThemesController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view', 'input', 'cssinput', 'cssinputview', 'cssinputcustomupdate', 'manage', 'customupdateview', 'uploadimage','addscript'),
+				'actions'=>array('index','view', 'input', 'cssinput', 'cssinputview', 'cssinputcustomupdate', 'manage', 'customupdateview', 'uploadimage','addscript','selectimage'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -223,7 +223,51 @@ class ThemesController extends Controller
         if (move_uploaded_file($_FILES["file"]["tmp_name"], $newFilename)) {
             // Save the link to the background image in the themes table
             $theme->background_image = $newFilename;
-           
+            
+           }
+      elseif (!empty($_POST['background_image_dropdown'])) {
+    // Handle the case where the user selects an image from the dropdown
+    $selectedImage = $_POST['background_image_dropdown'];
+    
+    // You may need to adjust this based on how your images are stored
+    $theme->background_image = 'images/' . $selectedImage;
+//    var_dump($theme);
+//    die();
+}
+else {
+    // If no image is provided, set background_image to null or any default value as needed
+    $theme->background_image = null;
+}
+      $iconExtension = pathinfo($_FILES["iconfile"]["name"], PATHINFO_EXTENSION);
+        $iconName = $_POST["iconfilename"];
+        $newIcon = 'icon/' . $iconName . '.' . $iconExtension;
+
+        // Check if the file upload was successful
+        if ($_FILES["iconfile"]["error"] === UPLOAD_ERR_OK) {
+            // Validate file type and size here if needed
+
+            // Move the uploaded file to the desired location
+            if (move_uploaded_file($_FILES["iconfile"]["tmp_name"], $newIcon)) {
+                // File upload successful, update the theme icon
+                $theme->icon = $newIcon;
+            } elseif (!empty($_POST['icon_dropdown'])) {
+                // If moving the file failed, check dropdown selection
+                $selectedIcon = $_POST['icon_dropdown'];
+                var_dump($selectedIcon);
+                die();
+                $theme->icon = 'icon/' . $selectedIcon;
+            } else {
+                // No valid selection or upload, set icon to null
+                $theme->icon = null;
+            }
+} else {
+    // Handle upload errors or no file uploaded
+    // Log errors or take necessary actions
+    $theme->icon = null;
+}
+
+        
+
 
         $theme_name = empty($_POST['theme_name']) ? null : $_POST['theme_name'];
 
@@ -242,8 +286,8 @@ $max_width = empty($_POST['max_width']) ? null : $_POST['max_width'];
 $min_height = empty($_POST['min_height']) ? null : $_POST['min_height'];
 $min_width = empty($_POST['min_width']) ? null : $_POST['min_width'];
 $box_sizing = empty($_POST['box_sizing']) ? null : $_POST['box_sizing'];
-$background_color = ($_POST['background_color'] !== '' && $_POST['background_color'] !== '#000000') ? $_POST['background_color'] : null;
-$background_image = empty($_POST['background_image']) ? null : $_POST['background_image'];
+$background_color = ($_POST['background_color'] !== '' && $_POST['background_color'] !== '#FFFFFF') ? $_POST['background_color'] : '#FFFFFF';
+//$background_image = empty($_POST['background_image']) ? null : $_POST['background_image'];
 //$color = ($_POST['color'] !== '' && $_POST['color'] !== '#000000') ? $_POST['color'] : null;
 //$font_size = empty($_POST['font_size']) ? null : $_POST['font_size'];
 $font_style = empty($_POST['font_style']) ? null : $_POST['font_style'];
@@ -304,7 +348,7 @@ $grid_column_end_mobile = empty($_POST['grid_column_end_mobile']) ? null : $_POS
 $grid_area_mobile = empty($_POST['grid_area_mobile']) ? null : $_POST['grid_area_mobile'];
 // Icon
 $icon_size = empty($_POST['icon_size']) ? null : $_POST['icon_size'];
-$icon_color = ($_POST['icon_color'] !== '' && $_POST['icon_color'] !== '#000000') ? $_POST['icon_color'] : null;
+//$icon_color = ($_POST['icon_color'] !== '' && $_POST['icon_color'] !== '#000000') ? $_POST['icon_color'] : null;
 // List
 $list_style = empty($_POST['list_style']) ? null : $_POST['list_style'];
 $list_style_type = empty($_POST['list_style_type']) ? null : $_POST['list_style_type'];
@@ -440,7 +484,7 @@ $text_shadow = empty($_POST['text_shadow'])?null :$_POST['text_shadow'];
         $theme->grid_area_mobile = empty($_POST['grid_area_mobile']) ? null : $_POST['grid_area_mobile'];
         //icon 
         $theme->icon_size = $icon_size. "px";
-        $theme->icon_color=$icon_color;
+//        $theme->icon_color=$icon_color;
        //List
         $theme -> list_style_position =$list_style_position;
         $theme -> list_style =$list_style;
@@ -606,15 +650,57 @@ $text_shadow = empty($_POST['text_shadow'])?null :$_POST['text_shadow'];
              $this->render('cssinput', array(
         'theme' => $theme,
     ));
-}}}
+}
+        }
+
 
 
   $this->render('cssinput', array(
         'theme' => $theme,
     ));
         }
+        
+public function actionselectImage()
+{
+    $imageFolderPath = 'images/';
+    
+    // Get the list using scandir
+    $savedImages = scandir($imageFolderPath);
 
-private function uploadImage($file)
+    // Remove '.' and '..' entries
+    $savedImages = array_diff($savedImages, array('.', '..'));
+//    print_r($savedImages);
+    
+     $imageList =[];
+     foreach ($savedImages as $savedImage){
+     $imageList[] = htmlspecialchars(urldecode($savedImage));
+}
+echo json_encode($imageList);
+     
+}
+
+// public function actionselectImage()
+//{
+//     $imagePath = 'images/Flag.jpeg';
+//     
+//     if(file_exists($imagePath)){
+//         
+//        // Set the appropriate Content-Type header
+//        header('Content-Type: image/jpeg');
+//
+//        // Output the image content
+//        readfile($imagePath);
+//     }
+//     else  {
+//          echo "image not found";
+//     }
+//}
+//            
+            
+            
+            
+         
+        private function uploadImage($file)
 {
     $uploadPath = 'images/'; // Your upload folder path
     $destination = $uploadPath . $file['name'];

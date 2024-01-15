@@ -123,7 +123,7 @@ class ScriptCodeController extends Controller
     
     // Print the final $js and die to see the result
     print_r($jsonScript);
-//     die();
+//    die();
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
 

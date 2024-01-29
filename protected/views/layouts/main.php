@@ -67,10 +67,11 @@
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <script src="<?php echo Yii::app()->baseUrl; ?>/AjaxFiles/customProperties.js"></script>
         <script src="<?php echo Yii::app()->baseUrl; ?>/AjaxFiles/texttypeproperties.js"></script>
-        <script src="<?php echo Yii::app()->baseUrl; ?>/AjaxFiles/applytheme.js"></script>
         <script src="<?php echo Yii::app()->baseUrl; ?>/AjaxFiles/effectScripts.js"></script>
         <script src="<?php echo Yii::app()->baseUrl; ?>/AjaxFiles/reportTheme.js"></script>
         <script src="<?php echo Yii::app()->baseUrl; ?>/AjaxFiles/applyReportTheme.js"></script>
+       <script src="<?php echo Yii::app()->baseUrl; ?>/AjaxFiles/ApplythemeonformId.js"></script>
+        <script src="<?php echo Yii::app()->baseUrl; ?>/AjaxFiles/applytheme.js"></script>
 
 <!--        <script src="<?php echo Yii::app()->baseUrl; ?>/AjaxFiles/setEffects.js"></script>-->
 

@@ -25,11 +25,11 @@
 #formPreview {
   font-style: Roboto;
 }
-#formPreview ul {
-    list-style: disc;
-    list-style-type: inside;
-    list-style-position: outside;
-  }
+/*ul {
+ background: #cce5ff;
+  color: darkblue;
+  margin: 5px;
+  }*/
    #formPreview  h1 {
       font-size: 22px;
       color: lightblue;
@@ -117,58 +117,37 @@
 <div id="textPreview">
 
           <h1>This is Preview</h1>
-       <h2>This is h2</h2>
-       <h3>This is h3</h3>
-       <p> THis is para</p>
+       <h2>Heading 2</h2>
+       <h3>Heading 3</h3>
+       <p> Paragraph </p>
            
 </div>
         <div id="livePreviewContainer"> <!-- Container for the live preview -->
-          <strong>Title</strong> 
-       <input type="text" name="name"><br>
-<!--      <p>Hello this is sample text to check alignment</p><br>
-      <input type="password" name="password"><br>-->
-                 <strong> Check Box</strong> 
+      
+               <strong>Dropbox</strong> 
 
-      <input type="checkbox" name="checkbox1"> Option 1
-      <input type="checkbox" name="checkbox2"> Option 2<br>
-                <strong>Radio Button</strong> 
-
-      <input type="radio" name="radio" value="option1"> Option 1
-      <input type="radio" name="radio" value="option2"> Option 2<br>
-                <strong>Dropbox</strong> 
-
-      <select name="select">
+       <select name="select">
         <option value="option1">Option 1</option>
         <option value="option2">Option 2</option>
         <option value="option3">Option 3</option><br>
       </select><br><br>
-                                <strong>Upload</strong> 
+                              
+        <!-- Add an ID to the <ul> element -->
+<strong>List</strong>
+<ul id="previewList">
+    <li>Student 1</li>
+    <li>Student 2</li>
+</ul>
 
-      <input type="file" name="file" id="linkPreview"><br>
-          <strong> List</strong> 
-<ul>
-    <li>List Item 1</li>
-    <li>List Item 2</li>
-  </ul>
   
-  <!-- Grid -->
-<!--          <strong>Grid</strong> 
-  <div class="grid-container">
-    <div class="grid-item">Grid Item 1</div>
-    <div class="grid-item">Grid Item 2</div>
-   
-  </div><br>-->
-  
-  <!-- Tabs -->
-          <strong>Tab </strong> 
-   Inside your "themePreview" 
-<div id="tabPreview">
-   Tab buttons 
-  <div class="tabs">
-    <button class="tabPreviewlinks" onclick="openTab(event, 'Tab1')">Tab 1</button>
-    <button class="tabPreviewlinks" onclick="openTab(event, 'Tab2')">Tab 2</button>
-     Add more buttons as needed 
-  </div>
+
+<!--          <strong>Tab </strong> 
+         <div id="tabPreview">
+            Tab buttons 
+           <div class="tabs">
+             <button class="tabPreviewlinks" onclick="openTab(event, 'Tab1')">Tab 1</button>
+             <button class="tabPreviewlinks" onclick="openTab(event, 'Tab2')">Tab 2</button>
+           </div>
 
    Tab content 
   <div id="Tab1" class="tabPreviewcontent">
@@ -179,15 +158,10 @@
     <h3>Tab 2 Content</h3>
     <p>This is the content of Tab 2.</p>
   </div>
-   Add more tab content sections as needed 
-</div>
+</div>-->
 
   
-  <!-- Icons -->
-        <strong>Icon</strong> 
-        
-  <i id="icon1" class="fas fa-star" color="black"></i>
-  <i class="fas fa-heart"></i><br>
+  
   
   <!-- Links -->
    <strong>Link</strong> 

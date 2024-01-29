@@ -1,4 +1,9 @@
-
+<style>
+/*    .span-19 {
+ border: 2px solid #FF5733!important; border-radius: 10px!important; font-size: 16px!important; background-color: #E6F0FF!important; color: #FF9D8F!important; display: !important; border-color: #FFCFCF!important; clear: !important; position: !important; transition-property: color, background-color, border-color!important; transition-duration: 0.4s!important; transition-timing-function: ease-in-out!important;  
+    
+    }*/
+</style>
 <?php
 $baseUrl = Yii::app()->baseUrl; 
 
@@ -314,19 +319,19 @@ $(document).ready(function() {
 </script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="http://localhost/newapplication/AjaxFiles/ApplyCSStoElements.js"></script>
-<script>
+<!--<script>
 //document.addEventListener('DOMContentLoaded', function () {
-//    var percentageElements = document.querySelectorAll('table td:nth-child(8)');
-//    percentageElements.forEach(function (element) {
-//      var percentage = parseInt(element.textContent);
-//      if (percentage >= 45) {
-//        element.style.setProperty('color', 'green', 'important');
-//      } else {
-//        element.style.setProperty('color', 'red', 'important');
-//      }
-//    });
+    var percentageElements = document.querySelectorAll('table td:nth-child(8)');
+    percentageElements.forEach(function (element) {
+      var percentage = parseInt(element.textContent);
+      if (percentage >= 45) {
+        element.style.setProperty('color', 'green', 'important');
+      } else {
+        element.style.setProperty('color', 'red', 'important');
+      }
+    });
 //  });
-</script>
+</script>-->
 
 
   

@@ -1,18 +1,34 @@
 $(document).ready(function() {
-    $.ajax({
-        url: 'index.php?r=formtheme/applyThemeToForms',
-        type: 'GET',
-        success: function(response) {
-            console.log('Theme applied successfully.'); // Optional: Display a success message in the console
-            
-            // Apply the CSS styles to the .form element
-            $('.body').css(response);
-            
-            // Additional code for handling the theme response, if needed
-        },
-        error: function() {
-            console.error('Error applying theme.'); // Optional: Display an error message in the console
-            // Additional error handling, if needed
-        }
+    // Event handler for page load
+    $(window).on('load', function() {
+        // Make the AJAX request to fetch CSS properties
+        var controllerName = $("#controllerId").val();
+        var actionName = $("#actionId").val();
+
+        $.ajax({
+            url: 'index.php?r=formthememapping/applyThemeToPage',
+            type: 'GET',
+        dataType: 'html', // Set the data type to 'html'
+            data: { controller: controllerName, action: actionName },
+
+            success: function(response) {
+               
+    console.log('Response:', response); // Log the response to the console
+
+                // Handle the success response here
+                // You can access the returned CSS string from the 'response' variable
+            $('#page').css('cssText', response);
+
+//                // Create a <style> element and append the CSS styles to it
+//                var styleElement = $('<style>').text(response);
+//                $('form').append(styleElement);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                // Handle the error case here
+                console.error('AJAX request failed:', textStatus, errorThrown);
+            }
+        });
     });
 });
+
+

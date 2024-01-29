@@ -32,7 +32,7 @@ class FormThemeMappingController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','applyElementCssProperties'),
+				'actions'=>array('create','update','applyElementCssProperties','applyThemeToPage'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -331,6 +331,59 @@ echo $output;
     }
 }
 
+public function actionApplyThemeToPage()
+{
+    $controllerId = isset($_GET['controller']) ? $_GET['controller'] : null;
+    $actionId = isset($_GET['action']) ? $_GET['action'] : null;
+//    print_r($controllerId);
+//        print_r($actionId);
+//die();
+//   $controllerId = "studentInformation";
+//    $actionId = "create";
+    $mapping = FormThemeMapping::model()->find(
+        'controller = :controller AND action = :action',
+        array(':controller' => $controllerId, ':action' => $actionId)
+            
+    
+    );
+//  var_dump($mapping);
+//  die();
+
+    if ($mapping !== null) {
+        $themeId = $mapping->theme_ID;
+
+        $elementCssProperties = ElementCssProperties::model()->findAll();
+        $themesColumnName = [];
+        foreach ($elementCssProperties as $elementCssProperty) {
+            $themesColumnName[] = $elementCssProperty->theme_columns;
+           // print_r($themesColumnName);
+        }
+         $themesColumnName = array_unique($themesColumnName);
+
+    // Print the unique column names
+    //print_r($themesColumnName);
+
+       
+$theme = Themes::model()->findByPk($themeId);
+  if ($theme !== null) {
+    $cssStyles = [];
+    foreach ($themesColumnName as $columnName) {
+        if (isset($theme->$columnName)) {
+            $cssStyle = str_replace('_', '-', $columnName);
+            $cssValue = $theme->$columnName;
+            $cssStyles[] = "$cssStyle: $cssValue!important";
+        }
+    }
+
+            $cssStylesString = implode('; ', $cssStyles);
+            echo $cssStylesString;
+        } else {
+            echo "Theme not found for the given theme_ID.";
+        }
+    } else {
+        echo "Mapping not found for the specified controller and action!";
+    }
+}
 
         
 }

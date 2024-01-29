@@ -192,23 +192,21 @@ function updateBackgroundProperties() {
     formPreview.style.backgroundImage = 'none';
   }
 }
-  function updateListProperties() {
-//    const listStyle = document.getElementById('list_style').value;
+function updateListProperties() {
     const listStyleType = document.getElementById('list_style_type').value;
     const listStylePosition = document.getElementById('list_style_position').value;
 
-    const ulElement = document.querySelector("#formPreview ul");
+    const ulElement = document.getElementById('previewList'); // Select the <ul> element by ID
 
     if (ulElement) {
-      ulElement.style.listStyle = listStyle;
-      ulElement.style.listStyleType = listStyleType;
-      ulElement.style.listStylePosition = listStylePosition;
+        ulElement.style.listStyleType = listStyleType;
+        ulElement.style.listStylePosition = listStylePosition;
     }
-  }
+}
 
-
-
-
+// Attach event listeners to form inputs
+document.getElementById("list_style_type").addEventListener("change", updateListProperties);
+document.getElementById("list_style_position").addEventListener("change", updateListProperties);
 
 function updateIconProperties() {
     const iconElement = document.getElementById('icon1'); // Select the icon element by its ID
@@ -216,20 +214,20 @@ function updateIconProperties() {
     iconElement.style.fontSize = themeForm.icon_size.value + "px";
 }
 // Function to update the "Tab3" properties
-//function updateTabProperties() {
-//  const tab3Content = document.getElementById('tabPreview');
-//
-//  tab3Content.style.backgroundColor = themeForm.tab_background_color.value;
-//  tab3Content.style.borderColor = themeForm.tab_border_color.value;
-//  tab3Content.style.borderWidth = themeForm.tab_border_width.value + "px";
-//  tab3Content.style.padding = themeForm.tab_padding.value + "px";
-//  tab3Content.style.margin = themeForm.tab_margin.value + "px";
-//  tab3Content.style.color = themeForm.tab_font_color.value;
-//  tab3Content.style.fontSize = themeForm.tab_font_size.value + "px";
-//  tab3Content.style.fontWeight = themeForm.tab_font_weight.value;
-//  tab3Content.style.textTransform = themeForm.tab_text_transform.value;
-//  tab3Content.style.textDecoration = themeForm.tab_text_decoration.value;
-//}
+function updateTabProperties() {
+  const tab3Content = document.getElementById('tabPreview');
+
+  tab3Content.style.backgroundColor = themeForm.tab_background_color.value;
+  tab3Content.style.borderColor = themeForm.tab_border_color.value;
+  tab3Content.style.borderWidth = themeForm.tab_border_width.value + "px";
+  tab3Content.style.padding = themeForm.tab_padding.value + "px";
+  tab3Content.style.margin = themeForm.tab_margin.value + "px";
+  tab3Content.style.color = themeForm.tab_font_color.value;
+  tab3Content.style.fontSize = themeForm.tab_font_size.value + "px";
+  tab3Content.style.fontWeight = themeForm.tab_font_weight.value;
+  tab3Content.style.textTransform = themeForm.tab_text_transform.value;
+  tab3Content.style.textDecoration = themeForm.tab_text_decoration.value;
+}
 
 
     // Add event listeners for "Box Model" form input fields
@@ -304,23 +302,19 @@ themeForm.hover.addEventListener("input", () => {
     
     //////////Tab/////////////////////
 // Add event listeners for "Tab" form input fields
-//themeForm.tab_background_color.addEventListener("input", updateTabProperties);
-//themeForm.tab_border_color.addEventListener("input", updateTabProperties);
-//themeForm.tab_border_width.addEventListener("input", updateTabProperties);
-//themeForm.tab_padding.addEventListener("input", updateTabProperties);
-//themeForm.tab_margin.addEventListener("input", updateTabProperties);
-//themeForm.tab_font_color.addEventListener("input", updateTabProperties);
-//themeForm.tab_font_size.addEventListener("input", updateTabProperties);
-//themeForm.tab_font_weight.addEventListener("input", updateTabProperties);
-//themeForm.tab_text_transform.addEventListener("input", updateTabProperties);
-//themeForm.tab_text_decoration.addEventListener("input", updateTabProperties);
+themeForm.tab_background_color.addEventListener("input", updateTabProperties);
+themeForm.tab_border_color.addEventListener("input", updateTabProperties);
+themeForm.tab_border_width.addEventListener("input", updateTabProperties);
+themeForm.tab_padding.addEventListener("input", updateTabProperties);
+themeForm.tab_margin.addEventListener("input", updateTabProperties);
+themeForm.tab_font_color.addEventListener("input", updateTabProperties);
+themeForm.tab_font_size.addEventListener("input", updateTabProperties);
+themeForm.tab_font_weight.addEventListener("input", updateTabProperties);
+themeForm.tab_text_transform.addEventListener("input", updateTabProperties);
+themeForm.tab_text_decoration.addEventListener("input", updateTabProperties);
 
 
 ////////////////List //////////////////////
-// Call the function when any of the list property inputs change
-//  document.getElementById("list_style").addEventListener("change", updateListProperties);
-//  document.getElementById("list_style_type").addEventListener("change", updateListProperties);
-//  document.getElementById("list_style_position").addEventListener("change", updateListProperties);
 
 ///////////////////Background Image ////////////////////
 themeForm.background_image.addEventListener("change", updateBackgroundProperties);
@@ -328,8 +322,8 @@ themeForm.background_repeat.addEventListener("change", updateBackgroundPropertie
 //  themeForm.background_position.addEventListener("change", updateBackgroundProperties);
 /////////////////////List///////////
 //  document.getElementById('list_style').addEventListener("change", updateListProperties);
-  document.getElementById('list_style_type').addEventListener("change", updateListProperties);
-  document.getElementById('list_style_position').addEventListener("change", updateListProperties);
+//  document.getElementById('list_style_type').addEventListener("change", updateListProperties);
+//  document.getElementById('list_style_position').addEventListener("change", updateListProperties);
 
     // Initialize the preview with default styles
     updateBoxModelProperties();
@@ -339,7 +333,8 @@ themeForm.background_repeat.addEventListener("change", updateBackgroundPropertie
     updateTransitionProperties();
     updateOutlineProperties();
     updateLinkProperties();
-//    updateTabProperties();
+    //tab view 
+    updateTabProperties();
     updateListProperties();
 updateBackgroundProperties();
 

@@ -29,6 +29,7 @@ $(document).ready(function() {
 
         // Append the style element to the document head
         document.head.appendChild(styleElement);
+            $('.form').css('cssText', styleElement);
 
         console.log('CSS styles with !important applied to the page.');
       },

@@ -32,7 +32,7 @@ class StudentInformationController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','getStudentDetails' ,'fetchstudentDetails'),
+				'actions'=>array('create','update','getStudentDetails' ,'fetchstudentDetails','testReport'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -270,6 +270,11 @@ class StudentInformationController extends Controller
     );
 
     // Rest of your code to apply the theme to forms
+}
+
+ public function actiontestReport(){
+    
+    $this->render("testreport");
 }
 
 }

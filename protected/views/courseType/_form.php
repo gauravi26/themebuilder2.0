@@ -141,7 +141,7 @@ $(document).ready(function() {
 });
 </script>
 
-  <script src="http://localhost/newapplication/AjaxFiles/ApplyCSStoElements.js"></script>
+  <script src="http://localhost/testproject/AjaxFiles/ApplyCSStoElements.js"></script>
          <script src="<?php echo Yii::app()->baseUrl; ?>/AjaxFiles/ApplythemeonformId.js"></script>
 
 

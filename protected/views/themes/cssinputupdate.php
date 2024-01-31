@@ -10,7 +10,6 @@ include 'themePreview.php'; // or require 'themePreview.php';
 
 
 
-themeform
 
       <script src="http://localhost/testproject/AjaxFiles/preview.js"></script>
 

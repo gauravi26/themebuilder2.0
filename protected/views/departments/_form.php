@@ -131,7 +131,7 @@ var newRow = '<tr><td>' + departmentName + '</td><td>' + departmentDesc + '</td>
 <!--<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>-->
 
 
-  <script src="http://localhost/newproject/AjaxFiles/ApplyCSStoElements.js"></script>
+  <script src="http://localhost/testproject/AjaxFiles/ApplyCSStoElements.js"></script>
 
 
 

@@ -27,6 +27,11 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->label($model,'percentage'); ?>
+		<?php echo $form->textField($model,'percentage',array('size'=>60,'maxlength'=>255)); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->label($model,'date_of_birth'); ?>
 		<?php echo $form->textField($model,'date_of_birth'); ?>
 	</div>

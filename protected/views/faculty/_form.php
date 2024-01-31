@@ -14,8 +14,8 @@ $controller = Yii::app()->getController();
     $controllerId = $controller->getId();
 
 
- echo CHtml::textField('controllerId',$controllerId); 
- echo CHtml::textField('actionId',$actionId); 
+ echo CHtml::hiddenField('controllerId',$controllerId); 
+ echo CHtml::hiddenField('actionId',$actionId); 
 
 
 
@@ -149,86 +149,7 @@ div.form input[type="checkbox"]{
     
     }?>
 
-   <body>
-  <div class="student-container">
-    <h2>HTML TABLE</h2>
-    <table class="student-report">
-      <thead>
-        <tr>
-          <th>Roll No.</th>
-          <th>Name</th>
-          <th>English</th>
-          <th>Maths</th>
-          <th>Science</th>
-          <th>Computer Science</th>
-          <th>Social Studies</th>
-          <th>Percent %</th> <!-- Added Total column -->
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>01</td>
-          <td>Ali</td>
-          <td>86</td>
-          <td>77</td>
-          <td>87</td>
-          <td>92</td>
-          <td>95</td>
-          <td>30</td> <!-- Placeholder for Total column -->
-        </tr>
-        <tr>
-          <td>02</td>
-          <td>Salman</td>
-          <td>86</td>
-          <td>77</td>
-          <td>87</td>
-          <td>92</td>
-          <td>95</td>
-          <td>45</td> <!-- Placeholder for Total column -->
-        </tr>
-        <tr>
-          <td>03</td>
-          <td>Shan</td>
-          <td>86</td>
-          <td>77</td>
-          <td>87</td>
-          <td>92</td>
-          <td>95</td>
-          <td>89</td> <!-- Placeholder for Total column -->
-        </tr>
-        <tr>
-          <td>04</td>
-          <td>Aliyan</td>
-          <td>86</td>
-          <td>77</td>
-          <td>87</td>
-          <td>92</td>
-          <td>95</td>
-          <td>37</td> <!-- Placeholder for Total column -->
-        </tr>
-        <tr>
-          <td>05</td>
-          <td>Zeeshan</td>
-          <td>86</td>
-          <td>77</td>
-          <td>87</td>
-          <td>92</td>
-          <td>95</td>
-          <td>95</td> <!-- Placeholder for Total column -->
-        </tr>
-      </tbody>
-      <!-- Footer (You can uncomment this if needed)
-      <tfoot>
-        <tr>
-          <td colspan=3>Maximum Marks: </td>
-          <td colspan=3>Marks Obtained: </td>
-          <td colspan=3>Grade: </td>
-        </tr>
-      </tfoot>
-      -->
-    </table>
-  </div>
-</body>
+  
        <script>
 //  document.addEventListener('DOMContentLoaded', function () {
 //    var percentageElements = document.querySelectorAll('table td:nth-child(8)');

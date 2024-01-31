@@ -254,8 +254,8 @@ textarea {
 <!--  <button class="tablinks" onclick="openCss(event, 'Grid')">Grid</button>
   <button class="tablinks" onclick="openCss(event, 'Icon')">Icon</button>
 -->  <button class="tablinks" onclick="openCss(event, 'List')">List</button>
-  <button class="tablinks" onclick="openCss(event, 'Tab')">Tab</button>
-  <button class="tablinks" onclick="openCss(event, 'Icon')">Icon</button>
+<!--  <button class="tablinks" onclick="openCss(event, 'Tab')">Tab</button>
+  <button class="tablinks" onclick="openCss(event, 'Icon')">Icon</button>-->
 
 
 
@@ -305,7 +305,7 @@ textarea {
                 </select><br>
 
                <label>Clear:</label>
-               <input type="text" name="clear" value="<?php echo CHtml::encode($theme->clear); ?>" > px<br> 
+               <input type="text" name="clear" value="<?php echo CHtml::encode($theme->clear); ?>" ><br> 
                
                <label>Position Property</label>
                 <select name="position" class="custom-select" value="<?php echo CHtml::encode($theme->position); ?>">
@@ -336,7 +336,7 @@ textarea {
     ));
   ?>
                <div id="Text" class="tabcontent"><br>
-        <label><strong>Text:</strong></label><br>
+        <label><strong>Text:</strong></label>
    <div class="nested-tab">
          <div class="nested-tablinks" onclick="openTextTypeTab(event, 'h1')">h1</div>
         <div class="nested-tablinks" onclick="openTextTypeTab(event, 'h2')">h2</div>
@@ -712,7 +712,7 @@ textarea {
 <!--                </div>-->
                 <div id ="Background" class="tabcontent"><br>
             
-                        <label><strong>Background :</strong></label><br>                        
+                        <label><strong>Background :</strong></label>                       
                 <label>Background Color:</label>
 <input type="color" name="background_color" value="<?php echo empty($theme->background_color) ? '#FFFFFF' : CHtml::encode($theme->background_color); ?>"><br>
  <label for="background_image">Background Image:</label>
@@ -859,7 +859,7 @@ echo CHtml::dropDownList(
                       
                 <div id ="Outline" class="tabcontent"><br>
             
-                        <label><strong>Outline:</strong></label><br>
+                        <label><strong>Outline:</strong></label>
                         <label>Outline Style:</label>
                         <select name="outline_style" class="custom-select">
                             <option value="none">None</option>
@@ -879,13 +879,13 @@ echo CHtml::dropDownList(
                       </div>
                 <div id ="Link" class="tabcontent"><br>
             
-                        <label><strong>Links:</strong></label><br>
+                        <label><strong>Link:</strong></label>
             <label>Link Color:</label>
             <input type="color" name="link_color"><br>
-            <label>Visited Link Color:</label>
+<!--            <label>Visited Link Color:</label>
             <input type="color" name="visited"><br>
             <label>Hover Link Color:</label>
-            <input type="color" name="hover"><br>
+            <input type="color" name="hover"><br>-->
         </div><br>
           <div id ="Icon" class="tabcontent"><br>      
            <label><strong>Icon:</strong></label>
@@ -1044,7 +1044,6 @@ Enter icon name:<input type="text" name="iconfilename"><br/>
   <option value="outside">Outside</option>
 </select>
 <br>
-      <b>Make sure to which Grip are applied it can create conflict with List Properties</b>
 
 </div>
 <br>

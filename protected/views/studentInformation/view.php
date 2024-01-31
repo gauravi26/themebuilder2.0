@@ -24,6 +24,7 @@ $this->menu=array(
 		'student_id',
 		'first_name',
 		'last_name',
+		'percentage',
 		'date_of_birth',
 		'address',
 		'phone_number',

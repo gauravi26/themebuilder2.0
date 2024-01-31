@@ -7,6 +7,7 @@
  * @property integer $student_id
  * @property string $first_name
  * @property string $last_name
+ * @property string $percentage
  * @property string $date_of_birth
  * @property string $address
  * @property string $phone_number
@@ -44,24 +45,18 @@ class StudentInformation extends CActiveRecord
 	{
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
-                        return array(
-            array('student_id', 'required'),
-            array('student_id, department_id, course_type_id, course_id, theme_ID', 'numerical', 'integerOnly'=>true),
-            array('first_name, last_name, major, academic_status, emergency_contact_relationship', 'length', 'max'=>50),
-            array('address, email_address', 'length', 'max'=>255),
-            array('phone_number, emergency_contact_phone', 'length', 'max'=>20),
-            array('emergency_contact_name', 'length', 'max'=>100),
-            array('date_of_birth', 'safe'),
-            array('email_address', 'email'), // add validation for email format
-            array('phone_number, emergency_contact_phone', 'match', 'pattern' => '/^\+?\d{2,3}\-?\d{7,10}$/',
-                'message' => 'Invalid phone number format. Please enter a valid phone number'), // add validation for phone number format
-            array('emergency_contact_phone', 'compare', 'compareAttribute' => 'phone_number', 'operator' => '!=',
-                'message' => 'Emergency contact phone number cannot be the same as student phone number.'), // add validation for emergency contact phone number
-            // The following rule is used by search().
-            // @todo Please remove those attributes that should not be searched.
-            array('student_id, first_name, last_name, date_of_birth, address, phone_number, email_address, department_id, course_type_id, course_id, major, academic_status, theme_ID, emergency_contact_name, emergency_contact_phone, emergency_contact_relationship', 'safe', 'on'=>'search'),
-);
-
+		return array(
+			array('student_id, percentage', 'required'),
+			array('student_id, department_id, course_type_id, course_id, theme_ID', 'numerical', 'integerOnly'=>true),
+			array('first_name, last_name, major, academic_status, emergency_contact_relationship', 'length', 'max'=>50),
+			array('percentage, address, email_address', 'length', 'max'=>255),
+			array('phone_number, emergency_contact_phone', 'length', 'max'=>20),
+			array('emergency_contact_name', 'length', 'max'=>100),
+			array('date_of_birth', 'safe'),
+			// The following rule is used by search().
+			// @todo Please remove those attributes that should not be searched.
+			array('student_id, first_name, last_name, percentage, date_of_birth, address, phone_number, email_address, department_id, course_type_id, course_id, major, academic_status, theme_ID, emergency_contact_name, emergency_contact_phone, emergency_contact_relationship', 'safe', 'on'=>'search'),
+		);
 	}
 
 	/**
@@ -88,6 +83,7 @@ class StudentInformation extends CActiveRecord
 			'student_id' => 'Student',
 			'first_name' => 'First Name',
 			'last_name' => 'Last Name',
+			'percentage' => 'Percentage',
 			'date_of_birth' => 'Date Of Birth',
 			'address' => 'Address',
 			'phone_number' => 'Phone Number',
@@ -125,6 +121,7 @@ class StudentInformation extends CActiveRecord
 		$criteria->compare('student_id',$this->student_id);
 		$criteria->compare('first_name',$this->first_name,true);
 		$criteria->compare('last_name',$this->last_name,true);
+		$criteria->compare('percentage',$this->percentage,true);
 		$criteria->compare('date_of_birth',$this->date_of_birth,true);
 		$criteria->compare('address',$this->address,true);
 		$criteria->compare('phone_number',$this->phone_number,true);

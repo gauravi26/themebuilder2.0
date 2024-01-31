@@ -1,18 +1,6 @@
 <?php
 /* @var $this StudentInformationController */
 /* @var $data StudentInformation */
-if (isset($data)) {
-    // Fetch the department model based on the department_id
-    $department = Departments::model()->findByPk($data->department_id);
-    
-    // Fetch the course model based on the course_id
-    $course = Courses::model()->findByPk($data->course_id);
-
-    // Display the department name and course name
-//    echo "<b>" . CHtml::encode($data->getAttributeLabel('department_id')) . ":</b> " . CHtml::encode($department->department_name) . "<br />";
-//    echo "<b>" . CHtml::encode($data->getAttributeLabel('course_id')) . ":</b> " . CHtml::encode($course->course_name) . "<br />";
-}
-
 ?>
 
 <div class="view">
@@ -29,6 +17,10 @@ if (isset($data)) {
 	<?php echo CHtml::encode($data->last_name); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('percentage')); ?>:</b>
+	<?php echo CHtml::encode($data->percentage); ?>
+	<br />
+
 	<b><?php echo CHtml::encode($data->getAttributeLabel('date_of_birth')); ?>:</b>
 	<?php echo CHtml::encode($data->date_of_birth); ?>
 	<br />
@@ -41,17 +33,19 @@ if (isset($data)) {
 	<?php echo CHtml::encode($data->phone_number); ?>
 	<br />
 
+	<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('email_address')); ?>:</b>
 	<?php echo CHtml::encode($data->email_address); ?>
 	<br />
 
-	<b><?php echo "<b>" . CHtml::encode($data->getAttributeLabel('department_id')) . ":</b> " . CHtml::encode($department->department_name) . "<br />";
- ?></b>
-	<?php //echo CHtml::encode($data->department_id); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('department_id')); ?>:</b>
+	<?php echo CHtml::encode($data->department_id); ?>
 	<br />
-        <b><?php echo "<b>" . CHtml::encode($data->getAttributeLabel('course_id')) . ":</b> " . CHtml::encode($course->course_name) . "<br />";
- 
- ?></b>
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('course_type_id')); ?>:</b>
+	<?php echo CHtml::encode($data->course_type_id); ?>
+	<br />
+
 	<b><?php echo CHtml::encode($data->getAttributeLabel('course_id')); ?>:</b>
 	<?php echo CHtml::encode($data->course_id); ?>
 	<br />
@@ -80,5 +74,6 @@ if (isset($data)) {
 	<?php echo CHtml::encode($data->emergency_contact_relationship); ?>
 	<br />
 
-	
+	*/ ?>
+
 </div>

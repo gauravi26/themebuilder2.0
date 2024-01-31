@@ -467,7 +467,20 @@ public function actionApplyThemeToForms()
             if (isset($theme->$columnName)) {
                 $cssStyles[] = "background-image: url('" . $theme->$columnName . "')";
             }
-        } else {
+        }
+       if ($columnName === 'link_color') {
+           
+           
+        if (isset($theme->$columnName)) {
+            $cssStyles[] = ":link { color: " . $theme->$columnName . " }";
+            
+//            print_r($cssStyles);
+//           die();
+        }
+    }
+
+        
+        else {
             if (isset($theme->$columnName)) {
                 $cssStyle = str_replace('_', '-', $columnName);
                 $cssValue = $theme->$columnName;

@@ -70,7 +70,7 @@
         <script src="<?php echo Yii::app()->baseUrl; ?>/AjaxFiles/effectScripts.js"></script>
         <script src="<?php echo Yii::app()->baseUrl; ?>/AjaxFiles/reportTheme.js"></script>
         <script src="<?php echo Yii::app()->baseUrl; ?>/AjaxFiles/applyReportTheme.js"></script>
-       <script src="<?php echo Yii::app()->baseUrl; ?>/AjaxFiles/ApplythemeonformId.js"></script>
+<!--       <script src="<?php echo Yii::app()->baseUrl; ?>/AjaxFiles/ApplythemeonformId.js"></script>-->
         <script src="<?php echo Yii::app()->baseUrl; ?>/AjaxFiles/applytheme.js"></script>
 
 <!--        <script src="<?php echo Yii::app()->baseUrl; ?>/AjaxFiles/setEffects.js"></script>-->
@@ -118,12 +118,12 @@
 
                 </ul>
             </li>
-            <li><a href="index.php?r=themes/index">Theme</a></li>
-            <li><a href="index.php?r=formthememapping/index">Form Theme</a></li>
-            <li><a href="index.php?r=FormElementCssPropertiesThemeMapping/getThemeDropBox">Element Properties</a></li>
-            <li><a href="index.php?r=currenttheme/update&id=1">Current Theme</a></li>
-             <li><a href="index.php?r=scriptCode/index">Effect Script</a></li>
-            <li><a href="index.php?r=effects/index"> Apply Effect</a></li>
+            <li><a href="index.php?r=themes/cssinput">Create Theme</a></li>
+            <li><a href="index.php?r=currenttheme/update&id=1">Apply Theme</a></li>
+            <li><a href="index.php?r=formthememapping/create">Specific Page Theme</a></li>
+            <li><a href="index.php?r=FormElementCssPropertiesThemeMapping/getThemeDropBox">Customize Applied Themes</a></li>
+            <li><a href="index.php?r=effects/create"> Apply Effect</a></li>
+            <li><a href="index.php?r=scriptCode/index">Effect Script</a></li>
 
         </ul>
     </div>

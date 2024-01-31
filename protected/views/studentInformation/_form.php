@@ -30,8 +30,8 @@ $controller = Yii::app()->getController();
 //die();
 
 ?>
-<?php echo CHtml::textField('controllerId',$controllerId); ?>
-<?php echo CHtml::textField('actionId',$actionId); ?>
+<?php echo CHtml::hiddenField('controllerId',$controllerId); ?>
+<?php echo CHtml::hiddenField('actionId',$actionId); ?>
 
 
 <!-- Rest of your form elements -->
@@ -156,131 +156,10 @@ $controller = Yii::app()->getController();
 	</div>
 
 <?php $this->endWidget(); ?>
-        <body>
-  <div class="student-container">
-    <h2>HTML TABLE</h2>
-    <table class="student-report">
-      <thead>
-        <tr>
-          <th>Roll No.</th>
-          <th>Name</th>
-          <th>English</th>
-          <th>Maths</th>
-          <th>Science</th>
-          <th>Computer Science</th>
-          <th>Social Studies</th>
-          <th>Percent %</th> <!-- Added Total column -->
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>01</td>
-          <td>Ali</td>
-          <td>86</td>
-          <td>77</td>
-          <td>87</td>
-          <td>92</td>
-          <td>95</td>
-          <td>30</td> <!-- Placeholder for Total column -->
-        </tr>
-        <tr>
-          <td>02</td>
-          <td>Salman</td>
-          <td>86</td>
-          <td>77</td>
-          <td>87</td>
-          <td>92</td>
-          <td>95</td>
-          <td>45</td> <!-- Placeholder for Total column -->
-        </tr>
-        <tr>
-          <td>03</td>
-          <td>Shan</td>
-          <td>86</td>
-          <td>77</td>
-          <td>87</td>
-          <td>92</td>
-          <td>95</td>
-          <td>89</td> <!-- Placeholder for Total column -->
-        </tr>
-        <tr>
-          <td>04</td>
-          <td>Aliyan</td>
-          <td>86</td>
-          <td>77</td>
-          <td>87</td>
-          <td>92</td>
-          <td>95</td>
-          <td>37</td> <!-- Placeholder for Total column -->
-        </tr>
-        <tr>
-          <td>05</td>
-          <td>Zeeshan</td>
-          <td>86</td>
-          <td>77</td>
-          <td>87</td>
-          <td>92</td>
-          <td>95</td>
-          <td>95</td> <!-- Placeholder for Total column -->
-        </tr>
-      </tbody>
-      <!-- Footer (You can uncomment this if needed)
-      <tfoot>
-        <tr>
-          <td colspan=3>Maximum Marks: </td>
-          <td colspan=3>Marks Obtained: </td>
-          <td colspan=3>Grade: </td>
-        </tr>
-      </tfoot>
-      -->
-    </table>
-  </div>
-</body>
+   
 
         <?php
         
-//  $controller = Yii::app()->getController();
-////  print_r($controller);
-//// die();
-//    $actionId = $controller->getAction()->getId();
-//    $controllerId = $controller->getId();
-//
-//    $mapping = FormThemeMapping::model()->find(
-//        'controller = :controller AND action = :action',
-//        array(':controller' => $controllerId, ':action' => $actionId)
-//    );
-//    //var_dump($mapping);
-//    //die();
-//    if ($mapping !== null) {
-//        $formId = $mapping->form_id;
-//        $themeId = $mapping->theme_ID;
-//
-//        print_r($themeId);
-//        // Fetch and apply the theme using the $themeId
-//        $theme = Themes::model()->findByPk($themeId);
-// if ($theme !== null) {
-//        $cssStyles = [];
-//        $themeAttributes = $theme->getAttributes();
-//
-//        foreach ($themeAttributes as $columnName => $value) {
-//            $cssStyle = str_replace('_', '-', $columnName); // Replace underscore with hyphen
-//            $cssStyles[] = "$cssStyle: $value";
-//        }
-//
-//        $cssStylesString = implode('; ', $cssStyles);
-//        echo '<div class="form" style="' . $cssStylesString . '"></div>';
-//    } else {
-//        // Handle the case when no theme is found for the given theme_ID
-//    }
-//        // Apply the theme logic here
-//        // ...
-//    } else {
-//        // Handle the case when no mapping is found for the current controller and action
-//        // ...
-//        
-//    }
-
-
 ?>
 
 </div><!-- form -->
@@ -318,20 +197,9 @@ $(document).ready(function() {
 });
 </script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="http://localhost/newapplication/AjaxFiles/ApplyCSStoElements.js"></script>
-<!--<script>
-//document.addEventListener('DOMContentLoaded', function () {
-    var percentageElements = document.querySelectorAll('table td:nth-child(8)');
-    percentageElements.forEach(function (element) {
-      var percentage = parseInt(element.textContent);
-      if (percentage >= 45) {
-        element.style.setProperty('color', 'green', 'important');
-      } else {
-        element.style.setProperty('color', 'red', 'important');
-      }
-    });
-//  });
-</script>-->
+  <script src="http://localhost/testproject/AjaxFiles/ApplyCSStoElements.js"></script>
+         <script src="<?php echo Yii::app()->baseUrl; ?>/AjaxFiles/ApplythemeonformId.js"></script>
+
 
 
   

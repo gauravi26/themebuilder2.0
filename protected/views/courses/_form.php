@@ -1,19 +1,5 @@
 <style>
-  /* Define the CSS styles for the background image */
-  .form-with-background {
-/*    background-image: url('http://localhost/testproject/assets/images/images%20(4).jpeg');*/
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-attachment: fixed;
-    width: 100%;
-    height: 500px;
-  }
-  
-  #courses-form{
-        transition: all 1s ease-out; /* Adjust the duration (0.5s) as needed */
 
-  }
 </style>
 
 <?php
@@ -50,8 +36,8 @@ $controller = Yii::app()->getController();
 
 
 
-            <?php echo CHtml::textField('controllerId',$controllerId); ?>
-<?php echo CHtml::textField('actionId',$actionId); ?>
+            <?php echo CHtml::hiddenField('controllerId',$controllerId); ?>
+<?php echo CHtml::hiddenField('actionId',$actionId); ?>
 
 <?php Yii::app()->clientScript->registerCoreScript('yiiactiveform'); ?>
 
@@ -203,6 +189,7 @@ $(document).ready(function() {
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!--<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>-->
+         <script src="<?php echo Yii::app()->baseUrl; ?>/AjaxFiles/ApplythemeonformId.js"></script>
 
 
   <script src="http://localhost/newproject/AjaxFiles/ApplyCSStoElements.js"></script>

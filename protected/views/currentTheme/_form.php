@@ -1,4 +1,9 @@
+<style>
+    
+/*:link { color: #53c544 } */
+</style>
 <?php
+
 /* @var $this CurrentThemeController */
 /* @var $model CurrentTheme */
 /* @var $form CActiveForm */
@@ -24,7 +29,7 @@
         <?php echo $form->dropDownList($model,'theme_ID', CHtml::listData(Themes::model()->findAll(),'ID','theme_name'), array('prompt' => 'Select Theme')); ?>
         <?php echo $form->error($model,'theme_ID'); ?>
     </div>
-
+<a href="default.asp" target="_blank">This is a link</a>
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>

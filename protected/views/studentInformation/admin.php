@@ -48,10 +48,11 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'student_id',
 		'first_name',
 		'last_name',
+		'percentage',
 		'date_of_birth',
 		'address',
-		'phone_number',
 		/*
+		'phone_number',
 		'email_address',
 		'department_id',
 		'course_type_id',

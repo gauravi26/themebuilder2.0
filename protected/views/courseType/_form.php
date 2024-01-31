@@ -34,8 +34,8 @@ $controller = Yii::app()->getController();
 
 ?>
 <div id="hide">
-<?php echo CHtml::textField('controllerId',$controllerId); ?>
-<?php echo CHtml::textField('actionId',$actionId); ?>
+<?php echo CHtml::hiddenField('controllerId',$controllerId); ?>
+<?php echo CHtml::hiddenField('actionId',$actionId); ?>
 
 </div>
 <!-- Rest of your form elements -->
@@ -142,6 +142,7 @@ $(document).ready(function() {
 </script>
 
   <script src="http://localhost/newapplication/AjaxFiles/ApplyCSStoElements.js"></script>
+         <script src="<?php echo Yii::app()->baseUrl; ?>/AjaxFiles/ApplythemeonformId.js"></script>
 
 
 
